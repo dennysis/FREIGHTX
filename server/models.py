@@ -29,3 +29,22 @@ class Ship(db.Model):
     available_tickets = db.Column(db.Integer, nullable=False)
     port_id = db.Column(db.Integer, db.ForeignKey('port.id'), nullable=False)
     contractor_id = db.Column(db.Integer,db.foreign.key('contractor.id'), nullable= False )
+
+class Port(db.Model, SerializerMixin):
+  __tablename__ = "ports"   
+  id = db.Column(db.Integer, primary_key=True)
+  name = db.Column(db.String, nullable=False)
+  location = db.Column(db.String, nullable=False)
+
+class Contractor(db.Model, SerializerMixin):
+  __tablename__ = "contractors"
+  id = db.Column(db.Integer, primary_key=True)
+  name = db.Column(db.String, nullable=False)
+  specialization = db.Column(db.String)
+  
+class UserShipAssociation(db.Model, SerializerMixin):
+    __tablename__ = 'user_ship_association'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    ship_id = db.Column(db.Integer, db.ForeignKey('ship.id'), nullable=False)
+    
