@@ -27,6 +27,7 @@ class Ship(db.Model):
     current_weight = db.Column(db.Float, default=0.0)
     total_tickets = db.Column(db.Integer, nullable=False)
     available_tickets = db.Column(db.Integer, nullable=False)
+    category = db.Column(db.String)
     port_id = db.Column(db.Integer, db.ForeignKey('port.id'), nullable=False)
     contractor_id = db.Column(db.Integer,db.foreign.key('contractor.id'), nullable= False )
 
@@ -35,6 +36,7 @@ class Port(db.Model, SerializerMixin):
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String, nullable=False)
   location = db.Column(db.String, nullable=False)
+  image_url = db.Column(db.String)
 
 class Contractor(db.Model, SerializerMixin):
   __tablename__ = "contractors"
@@ -47,4 +49,3 @@ class UserShipAssociation(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     ship_id = db.Column(db.Integer, db.ForeignKey('ship.id'), nullable=False)
-    
