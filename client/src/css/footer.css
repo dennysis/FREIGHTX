@@ -1,0 +1,40 @@
+#footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1cafb9; 
+    padding: 10px 20px; 
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(28, 42, 44, 0.1);
+    box-sizing: border-box; 
+}
+
+#footer-logo {
+    height: 150px; 
+    width: auto;
+}
+
+.company-footer {
+    text-align: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    flex: 1; 
+}
+
+#contacts {
+    text-align: right;
+    margin-left: 20px; 
+}
+
+#contacts ul {
+    list-style: none;
+    padding: 0;
+    margin: 0; 
+}
+
+#contacts li {
+    margin: 5px 0;
+    white-space: nowrap; 
+}

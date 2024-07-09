@@ -1,0 +1,39 @@
+.section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px;
+    background-color: rgb(199, 33, 33);
+}
+
+.section.alternate {
+    flex-direction: reverse;
+    background-color: rgb(238, 238, 238);
+}
+
+.text {
+    flex: 1;
+    margin: 0 20px;
+}
+
+.pic {
+    width: 40%; /* Adjust size as needed */
+    height: auto;
+}
+
+.headers {
+    font-size: 50px;
+    font-weight: bold;
+    line-height: 1.2;
+    text-decoration: underline;
+}
+
+.proverbs {
+    font-style: italic;
+}
+.p{
+    font-size: larger;
+}
+#section2{
+    padding-bottom: 250px;
+}
