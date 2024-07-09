@@ -19,3 +19,13 @@ class Passenger(db.Model):
     cost = db.Column(db.Float, nullable=False)
     destination = db.Column(db.String(100), nullable=False)
     ship_id = db.Column(db.Integer, db.ForeignKey('ship.id'), nullable=True)
+
+class Ship(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20), nullable=False)
+    capacity_weight = db.Column(db.Float, nullable=False)
+    current_weight = db.Column(db.Float, default=0.0)
+    total_tickets = db.Column(db.Integer, nullable=False)
+    available_tickets = db.Column(db.Integer, nullable=False)
+    port_id = db.Column(db.Integer, db.ForeignKey('port.id'), nullable=False)
+    contractor_id = db.Column(db.Integer,db.foreign.key('contractor.id'), nullable= False )
