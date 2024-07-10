@@ -6,21 +6,36 @@ from config import db
 # Models go here!
 class User(db.Model, SerializerMixin):
   __tablename__ = "users"
+  serialize_rules = ('-password', '-passengers.user')
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(100), nullable=False)
   email = db.Column(db.String(100), unique=True, nullable=False)
   password = db.Column(db.String, nullable=False)
   balance = db.Column(db.Integer, nullable=False)
+  passengers = db.relationship('Passenger', back_populates='user')
+  ships = association_proxy('passengers', 'ship')
+
+  def __repr__(self):
+      return f'<User {self.name}>'
 
 class Passenger(db.Model):
+    __tablename__ = "passengers"
+    serialize_rules = ('-user.passengers', '-ship.passengers')
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     ticket_number = db.Column(db.String(10), unique=True, nullable=False)
     cost = db.Column(db.Float, nullable=False)
     destination = db.Column(db.String(100), nullable=False)
-    ship_id = db.Column(db.Integer, db.ForeignKey('ship.id'), nullable=True)
+    ship_id = db.Column(db.Integer, db.ForeignKey('ships.id'), nullable=True)
+    ship = db.relationship('Ship', back_populates='passengers')
+    user = db.relationship('User', back_populates='passengers')
+
+    def __repr__(self):
+      return f'<Passenger {self.ticket_number}>'
 
 class Ship(db.Model):
+    __tablename__ ="ships"
+    serialize_rules = ('-contractor.ships', '-port.ships', '-passengers.ship')
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), nullable=False)
     capacity_weight = db.Column(db.Float, nullable=False)
@@ -28,24 +43,42 @@ class Ship(db.Model):
     total_tickets = db.Column(db.Integer, nullable=False)
     available_tickets = db.Column(db.Integer, nullable=False)
     category = db.Column(db.String)
-    port_id = db.Column(db.Integer, db.ForeignKey('port.id'), nullable=False)
-    contractor_id = db.Column(db.Integer,db.foreign.key('contractor.id'), nullable= False )
-
+    port_id = db.Column(db.Integer, db.ForeignKey('ports.id'), nullable=False)
+    contractor_id = db.Column(db.Integer,db.ForeignKey('contractors.id'), nullable= False )
+    passengers = db.relationship('Passenger', back_populates='ship')
+    contractor = db.relationship('Contractor', back_populates='ships')
+    port = db.relationship('Port', back_populates='ships')
+    
+    def __repr__(self):
+        return f'<Ship {self.name}>'
+    
 class Port(db.Model, SerializerMixin):
   __tablename__ = "ports"   
+  serialize_rules = ('-ships.port') 
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String, nullable=False)
   location = db.Column(db.String, nullable=False)
   image_url = db.Column(db.String)
+  ships = db.relationship('Ship', back_populates='port')
 
+  def __repr__(self):
+      return f'<Port {self.name}>'
+  
 class Contractor(db.Model, SerializerMixin):
   __tablename__ = "contractors"
+  serialize_rules = ('-ships.contractor',)
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String, nullable=False)
   specialization = db.Column(db.String)
+  contact_info = db.Column(db.String)
+  ships = db.relationship('Ship', back_populates='contractor')
+
+  def __repr__(self):
+      return f'<Contractor {self.name}>'
+
   
 class UserShipAssociation(db.Model, SerializerMixin):
     __tablename__ = 'user_ship_association'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    ship_id = db.Column(db.Integer, db.ForeignKey('ship.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    ship_id = db.Column(db.Integer, db.ForeignKey('ships.id'), nullable=False)
