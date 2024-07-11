@@ -8,7 +8,7 @@ from faker import Faker
 
 # Local imports
 from app import app
-from models import db, Contractor, User, Port
+from models import db, Contractor, User, Port, Package,Passenger
 
 # Seed data function
 if __name__ == '__main__':
@@ -70,5 +70,40 @@ if __name__ == '__main__':
         db.session.add_all([port1, port2, port3, port4, port5, port6, port7, port8, port9, port10, port11, port12, port13, port14])
         db.session.commit()
         print("Ports seeding complete.")
+
+
+        
+        passengers = [
+            Passenger(
+                user_id=rc(users).id,
+                ticket_number=fake.bothify(text='???-########'),
+                cost=fake.pyfloat(left_digits=3, right_digits=2, positive=True, min_value=100, max_value=1000),
+                destination=fake.city(),
+                ship_id=rc(ships).id# type: ignore
+            )
+            for _ in range(100)
+        ]
+
+        db.session.add_all(passengers)
+        db.session.commit()
+        print("Passengers seeding complete.")
+
+        
+        packages = [
+            Package(
+                ship_id=rc(ships).id, # type: ignore
+                destination=fake.city(),
+                price=randint(100, 1000),
+                status=rc(["Shipped", "Pending", "Delivered"]),
+                weight=randint(1, 100)
+            )
+            for _ in range(50)
+        ]
+
+        db.session.add_all(packages)
+        db.session.commit()
+        print("Packages seeding complete.")
+
+        
 
         print("Seeding complete!")
