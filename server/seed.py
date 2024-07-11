@@ -66,8 +66,20 @@ if __name__ == '__main__':
         port12 = Port(name=fake.name(), location=fake.city(), image_url="https://i.pinimg.com/236x/01/c7/e6/01c7e67ebad481a0b97bb39a7b6ae926.jpg")
         port13= Port(name=fake.name(), location=fake.city(), image_url="https://i.pinimg.com/236x/99/f5/6f/99f56f46b22fccc8ddb506c2d6482e57.jpg")
         port14 = Port(name=fake.name(), location=fake.city(), image_url="https://i.pinimg.com/236x/11/0a/0c/110a0c8611687e8b37c51cc4a82aea79.jpg")
-    
-        db.session.add_all([port1, port2, port3, port4, port5, port6, port7, port8, port9, port10, port11, port12, port13, port14])
+        Port15 = Port(name=fake.name(), location=fake.city(), image_url="https://cdn.dribbble.com/users/6046276/screenshots/16344197/media/1f0be65047390b7c5bfe64c4f4a81618.jpg?resize=800x600&vertical=center"),
+        Port16 = Port(name=fake.name(), location=fake.city(), image_url="https://cdn.dribbble.com/users/6046276/screenshots/16299979/media/10fd63a08651b1f431fd6c2100b218ee.jpg?resize=400x300&vertical=center"),
+        Port17 = Port(name=fake.name(), location=fake.city(), image_url="https://cdn.dribbble.com/users/9033539/screenshots/20139768/media/8a18c8ef49b9827cad2537570505d2d8.jpg?resize=800x600&vertical=center"),
+        Port18 = Port(name=fake.name(), location=fake.city(), image_url="https://cdn.dribbble.com/userupload/11671050/file/original-fee189f0a8c9fe6d06d127e84d1ee4e2.png?resize=450x338&vertical=center"),
+        Port19 = Port(name=fake.name(), location=fake.city(), image_url="https://i.pinimg.com/236x/b0/06/24/b00624a7d0ba6e4543151ec518e3c998.jpg"),
+        Port20 = Port(name=fake.name(), location=fake.city(), image_url="https://i.pinimg.com/236x/43/76/4b/43764b3310310de67b5a20d8bb1dc07f.jpg"),
+        Port21 = Port(name=fake.name(), location=fake.city(), image_url="https://i.pinimg.com/236x/cf/49/6a/cf496a11430c879b5840504610967643.jpg"),
+        Port22 = Port(name=fake.name(), location=fake.city(), image_url="https://i.pinimg.com/236x/fb/e9/ab/fbe9ab0cd0fb9622d0f6d573f7bea158.jpg"),
+        Port23 = Port(name=fake.name(), location=fake.city(), image_url="https://i.pinimg.com/236x/f5/c6/22/f5c62299746c8811d75bddf72cb1b51f.jpg"),
+        Port24 = Port(name=fake.name(), location=fake.city(), image_url="https://i.pinimg.com/236x/85/d5/84/85d5842f2b0c482816554bac98f8b2ca.jpg"),
+        Port25 = Port(name=fake.name(), location=fake.city(), image_url="https://i.pinimg.com/236x/f0/42/97/f04297e09bb0ac138fbbded1e19b81ed.jpg"),
+        Port26 = Port(name=fake.name(), location=fake.city(), image_url="https://i.pinimg.com/236x/86/09/2d/86092dfef0b5958b35932c180e560aa4.jpg")
+        
+        db.session.add_all([port1, port2, port3, port4, port5, port6, port7, port8, port9, port10, port11, port12, port13, port14, Port15 ,Port16, Port17,Port18,Port19,Port20,Port21,Port22,Port23,Port24,Port25,Port26])
         db.session.commit()
         print("Ports seeding complete.")
 
@@ -79,7 +91,7 @@ if __name__ == '__main__':
                 ticket_number=fake.bothify(text='???-########'),
                 cost=fake.pyfloat(left_digits=3, right_digits=2, positive=True, min_value=100, max_value=1000),
                 destination=fake.city(),
-                ship_id=rc(ships).id# type: ignore
+                ship_id=rc(ships).id # type: ignore
             )
             for _ in range(100)
         ]
@@ -104,6 +116,5 @@ if __name__ == '__main__':
         db.session.commit()
         print("Packages seeding complete.")
 
-        
 
         print("Seeding complete!")
