@@ -32,11 +32,30 @@ function Auth({ onLogin, isLogin }) {
         history.push(isLoginMode ? "/signup" : "/login"); // Navigate to the new path
     }
 
+    function handleLogout() {
+        fetch('/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message); // Show the logout message
+            if (data.action === 'prompt_login') {
+                history.push('/login'); // Redirect to the login page
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
     return (
         <div id="login">
             <div className="navbar">
                 <img src="https://i.pinimg.com/564x/86/4a/3e/864a3e877dc16143e216b145da06a336.jpg" alt="Logo" className="logo" />
                 <span className="brand-name">FREIGHTX</span>
+                {/* Add a logout button */}
+                <button onClick={handleLogout}>Logout</button>
             </div>
             <div className="circle-container">
                 <div className={`circle ${isLoginMode ? "left-login" : "left-signup"}`}>
