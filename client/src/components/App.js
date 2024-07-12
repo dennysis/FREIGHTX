@@ -4,6 +4,7 @@ import Auth from "./Auth";
 import Home from "./Home";
 import Cargo from "./Cargo";
 import Passenger from "./Passenger";
+import Ship from "./Ship";
 import { Redirect } from "react-router-dom";
 ;
 
@@ -31,6 +32,8 @@ function App() {
             render={(props) => <Cargo user={user} {...props} />} />
             <Route path="/passenger"
             render={(props) => <Passenger user={user} {...props} />} />
+            <Route path="/ship"
+            render={(props) => <Ship user={user} {...props} />} />
             {/* <Route path="/">
                 {user ? <Home user={user} /> : <Redirect to="/login" />}
             </Route> */}

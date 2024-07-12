@@ -34,7 +34,7 @@ function Home({ user }) {
             </div>
             
             <div id="section2" className="section">
-                <img src="https://i.pinimg.com/564x/d5/a5/54/d5a55403bfc45d54f2fe7763b923cf40.jpg" alt="pic" className="pic" />
+                <img id="pic3" src="https://i.pinimg.com/564x/d5/a5/54/d5a55403bfc45d54f2fe7763b923cf40.jpg" alt="pic" className="pic" />
                 <div className="text">
                     <h2 className="headers">What are our Future Plans?</h2>
                     <p className="proverbs">~The secret to getting results is to never stop making improvements.~ </p>
