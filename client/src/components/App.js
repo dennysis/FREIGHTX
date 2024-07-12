@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import Auth from "./Auth";
 import Home from "./Home";
-import Cargo from "./Cargo";
-import Passenger from "./Passenger";
+import Ports from "./Ports";
+
 import Ship from "./Ship";
+import Shiplist from "./Shiplist";
 import { Redirect } from "react-router-dom";
 ;
 
@@ -17,6 +18,7 @@ function App() {
       }
     });
   }, []);
+
   return (
     <div>
         <Switch>
@@ -28,12 +30,12 @@ function App() {
             </Route>
             <Route path="/home"
             render={(props) => <Home user={user} {...props} />} />
-            <Route path="/cargo"
-            render={(props) => <Cargo user={user} {...props} />} />
-            <Route path="/passenger"
-            render={(props) => <Passenger user={user} {...props} />} />
-            <Route path="/ship"
+            <Route path="/port"
+            render={(props) => <Ports user={user} {...props} />} />
+            <Route path="/ship/:id"
             render={(props) => <Ship user={user} {...props} />} />
+            <Route path="/ports/:id/ships" render={(props) => <Shiplist category="cargo" {...props} />} />
+            <Route path="/ports/:id/ships" render={(props) => <Shiplist category="passenger" {...props} />} />
             {/* <Route path="/">
                 {user ? <Home user={user} /> : <Redirect to="/login" />}
             </Route> */}

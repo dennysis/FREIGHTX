@@ -19,7 +19,13 @@ def get_ports():
     ports = Port.query.all()
     port_data = [port.to_dict() for port in ports]
     return make_response(jsonify(port_data), 200)
-
+@app.route('/ports/<int:port_id>', methods=['GET'])
+def get_port_by_id(port_id):
+    port = Port.query.filter_by(id=port_id).first()  # Adjusted filter_by to filter by port_id
+    if not port:
+        return make_response(jsonify({'error': 'Port not found'}), 404)
+    
+    return make_response(jsonify(port.to_dict()), 200)
 @app.route('/ports/<int:port_id>/ships', methods=['GET'])
 def get_ships_by_port(port_id):
     category = request.args.get('category')
