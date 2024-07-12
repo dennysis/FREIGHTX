@@ -47,24 +47,24 @@ class Passenger(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'<Passenger {self.ticket_number}>'
-
-class Ship(db.Model, SerializerMixin):
-    __tablename__ ="ships"
-    serialize_rules = ('-contractor.ships', '-port_from.ships', '-port_to.ships', '-passengers.ship')
+    
+class Ship(db.Model):
+    __tablename__ = 'ships'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
     capacity_weight = db.Column(db.Float, nullable=False)
     current_weight = db.Column(db.Float, default=0.0)
     total_tickets = db.Column(db.Integer, nullable=False)
     available_tickets = db.Column(db.Integer, nullable=False)
-    category = db.Column(db.String, nullable=False)
+    category = db.Column(db.String(50), nullable=False)
     port_from_id = db.Column(db.Integer, db.ForeignKey('ports.id'), nullable=False)
     port_to_id = db.Column(db.Integer, db.ForeignKey('ports.id'), nullable=False)
+    price = db.Column(db.Integer, nullable=False)  
     contractor_id = db.Column(db.Integer, db.ForeignKey('contractors.id'), nullable=False)
     passengers = db.relationship('Passenger', back_populates='ship')
-    contractor = db.relationship('Contractor', back_populates='ships')
     port_from = db.relationship('Port', foreign_keys=[port_from_id], back_populates='ships_departing')
     port_to = db.relationship('Port', foreign_keys=[port_to_id], back_populates='ships_arriving')
+    contractor = db.relationship('Contractor', back_populates='ships')
     
     def __repr__(self):
         return f'<Ship {self.name}>'
@@ -88,6 +88,7 @@ class Ship(db.Model, SerializerMixin):
             },
             'contractor_id': self.contractor_id
         }
+
     
 class Port(db.Model, SerializerMixin):
     __tablename__ = "ports"   
