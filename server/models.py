@@ -125,13 +125,13 @@ class Package(db.Model, SerializerMixin):
         return f'<Package {self.destination}>'
   
 class UserShipAssociation(db.Model, SerializerMixin):
-    tablename = 'user_ship_association'
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    ship_id = db.Column(db.Integer, db.ForeignKey('ships.id'), nullable=False)
+   __tablename__  = 'user_ship_association'
+   id = db.Column(db.Integer, primary_key=True)
+   user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+   ship_id = db.Column(db.Integer, db.ForeignKey('ships.id'), nullable=False)
 
 class Transaction(db.Model):
-    tablename = 'transactions'
+    __tablename__  = 'transactions'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
