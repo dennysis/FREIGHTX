@@ -1,0 +1,55 @@
+.ports-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding: 16px;
+  }
+  
+  /* For smaller screens, adjust the number of columns */
+  @media (max-width: 1200px) {
+    .ports-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .ports-container {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .port-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .port-card-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  .port-card h3 {
+    margin: 16px 0 8px;
+    font-size: 1.2em;
+  }
+  
+  .port-card p {
+    margin: 0 0 16px;
+    color: #666;
+  }
+  #button{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  
