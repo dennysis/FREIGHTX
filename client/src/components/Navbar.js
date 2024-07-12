@@ -11,7 +11,7 @@ function Navbar() {
                 </Link>
             </div>
             <div className="navbar-center">
-                <Link to="/port" className="navbar-link">PORTS</Link>
+                <Link id="port-link" to="/port" className="navbar-link">PORTS</Link>
             </div>
             <div className="navbar-right">
                 <Link to="/user" className="navbar-link">

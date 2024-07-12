@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { useParams } from "react-router-dom";
+import '../css/ship.css';
 
 const contractors = [
   "Maersk", "Mediterranean Shipping Company (MSC)", "CMA CGM Group",
@@ -65,38 +66,47 @@ function Ship() {
     <div>
       <Navbar />
       <div className="ship-container">
-        <h1>{ship.name}</h1>
-        <p>Category: {ship.category}</p>
-        {ship.category === "passenger" && (
-          <div id="quantity">
-            <button onClick={() => handleQuantityChange(-1)}>-</button>
-            <span>{quantity}</span>
-            <button onClick={() => handleQuantityChange(1)}>+</button>
-          </div>
-        )}
-        {ship.category === "cargo" && (
-          <div id="brand">
-            <label htmlFor="cargoType">Select Cargo Type:</label>
-            <select
-              id="cargoType"
-              value={cargoType}
-              onChange={handleCargoTypeChange}
-            >
-              {contractors.map((contractor, index) => (
-                <option key={index} value={contractor}>
-                  {contractor}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-        <div id="ship-image">
+        <div className="ship-photo">
           <img src={shipImage} alt="Ship" />
         </div>
-        <div id="buttons">
-          <button onClick={handleBooking}>
-            Book
-          </button>
+        <div className="ship-details">
+          <h1>{ship.name}</h1>
+          <p id="category">Category: {ship.category}</p>
+          <p id="departure">Departure: {ship.port_from.name}</p>
+          <p id="arrival">Arrival: {ship.port_to.name}</p>
+          <p id="total-tickets">Total Tickets: {ship.total_tickets}</p>
+          <p id="remaining-tickets">Remaining Tickets: {ship.available_tickets}</p>
+          {ship.category === "passenger" && (
+            <div id="quantity">
+              <label>Number of Tickets</label>
+              <div id="quantity-controls">
+                <button onClick={() => handleQuantityChange(-1)}>-</button>
+                <span>{quantity}</span>
+                <button onClick={() => handleQuantityChange(1)}>+</button>
+              </div>
+            </div>
+          )}
+          {ship.category === "cargo" && (
+            <div id="brand">
+              <label htmlFor="cargoType">Select Cargo Type:</label>
+              <select
+                id="cargoType"
+                value={cargoType}
+                onChange={handleCargoTypeChange}
+              >
+                {contractors.map((contractor, index) => (
+                  <option key={index} value={contractor}>
+                    {contractor}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+          <div id="buttons">
+            <button onClick={handleBooking}>
+              Book
+            </button>
+          </div>
         </div>
       </div>
       <Footer />

@@ -11,7 +11,7 @@ function Ports() {
     return (
         <div>
             <Navbar />
-            <h1 id="head">Cargo booking</h1>
+            <h1 id="head">Port Hubs</h1>
             <div className="ports-container">
                 {ports.map((port) => (
                     <PortCard key={port.id} port={port} />

@@ -1,15 +1,21 @@
 .ship-container {
     display: flex;
-    align-items: flex-start;
+    align-items: flex-start; /* Align items to the top */
+    justify-content: center; /* Center items horizontally */
+    text-align: center; /* Center text */
+    max-width: 800px; /* Limit maximum width */
+    margin: 0 auto; /* Center container horizontally */
+    padding-top: 70px;
   }
   
   .ship-photo {
-    flex: 1;
-    margin-right: 20px;
+    flex: 1; /* Take 1/3 of available space */
+    margin-right: 20px; /* Add space between image and details */
   }
   
   .ship-details {
-    flex: 2;
+    flex: 2; /* Take 2/3 of available space */
+    text-align: left; /* Align text to the left within details */
   }
   
   .ship-details h1 {
@@ -20,7 +26,45 @@
     margin-bottom: 10px;
   }
   
-  #quantity,
+  #quantity {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column; /* Align label and buttons vertically */
+    align-items: center; /* Center align items */
+  }
+  
+  #quantity label {
+    margin-bottom: 10px;
+  }
+  
+  #quantity-controls {
+    display: flex;
+    align-items: center;
+  }
+  
+  #quantity-controls button {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #quantity-controls span {
+    margin: 0 10px;
+    font-size: 18px;
+  }
+  
+  #quantity-controls button:hover {
+    background-color: #0056b3;
+  }
+  
+  #quantity-controls button:focus {
+    outline: none;
+  }
+  
   #brand {
     margin-top: 10px;
   }
@@ -56,5 +100,18 @@
     height: auto;
     display: block;
     border-radius: 8px;
+  }
+  #departure {
+    margin-top: 10px;
+    font-size: 20px;
+  }
+  
+  #arrival {
+    margin-top: 10px;
+    font-size: 18px;
+  }
+  #category {
+    font-style: italic;
+    font-size: larger;
   }
   
