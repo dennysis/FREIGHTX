@@ -14,7 +14,8 @@ class User(db.Model, SerializerMixin):
     _password_hash = db.Column(db.String, nullable=False)
     balance = db.Column(db.Integer, nullable=False)
     passengers = db.relationship('Passenger', back_populates='user')
-    ships = association_proxy('passengers', 'ship')
+    ships = association_proxy('passengers','ship')
+    transactions = db.relationship('Transaction', back_populates='user')  
 
     @hybrid_property
     def password_hash(self):
@@ -30,6 +31,7 @@ class User(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'<User {self.name}>'
+
 
 class Passenger(db.Model, SerializerMixin):
     __tablename__ = "passengers"
@@ -131,14 +133,13 @@ class UserShipAssociation(db.Model, SerializerMixin):
    ship_id = db.Column(db.Integer, db.ForeignKey('ships.id'), nullable=False)
 
 class Transaction(db.Model):
-    __tablename__  = 'transactions'
+    __tablename__ = 'transactions'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String(255))
     created_at = db.Column(db.DateTime, default=db.func.now())
+    user = db.relationship('User', back_populates='transactions')  
 
-user = db.relationship('User', back_populates='transactions')
-
-def __repr__(self):
-    return f'<Transaction {self.id}>'
+    def __repr__(self):
+        return f'<Transaction {self.id}>'
