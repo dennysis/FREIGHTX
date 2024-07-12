@@ -1,41 +1,39 @@
-#!/usr/bin/env python3
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
+from datetime import datetime
 
-# Standard library imports
-import os
+from flask import request, jsonify, session, make_response
+from flask_restful import Resource
 
-# Remote library imports
-from flask import Flask, request, jsonify, session, make_response
-from flask_migrate import Migrate
-from flask_restful import Api, Resource
-from sqlalchemy.exc import IntegrityError
+from config import app, db, api, bcrypt
 
-# Local imports
-from config import db, bcrypt
-from models import User, Ship
-
-# App configuration
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-DATABASE = os.environ.get("DB_URI", f"sqlite:///{os.path.join(BASE_DIR, 'app.db')}")
-
-app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.json.compact = False
-
-migrate = Migrate(app, db)
-db.init_app(app)
-api = Api(app)
-
-# Routes
-@app.route('/')
-def index():
-    return "<h1>Code challenge</h1>"
+from models import User, Ship, Port, Transaction
 
 @app.route('/ships', methods=['GET'])
 def get_ships():
     ships = Ship.query.all()
     ships_data = [ship.to_dict() for ship in ships]
     return make_response(jsonify(ships_data), 200)
+
+@app.route('/ports', methods=['GET'])
+def get_ports():
+    ports = Port.query.all()
+    port_data = [port.to_dict() for port in ports]
+    return make_response(jsonify(port_data), 200)
+
+@app.route('/ports/<int:port_id>/ships', methods=['GET'])
+def get_ships_by_port(port_id):
+    category = request.args.get('category')
+    if category:
+        ships = Ship.query.filter((Ship.port_from_id == port_id) | (Ship.port_to_id == port_id), Ship.category == category).all()
+    else:
+        ships = Ship.query.filter((Ship.port_from_id == port_id) | (Ship.port_to_id == port_id)).all()
+    ships_data = [ship.to_dict() for ship in ships]
+    return make_response(jsonify(ships_data), 200)
+
+@app.route('/ships/<int:ship_id>', methods=['GET'])
+def get_ship(ship_id):
+    ship = Ship.query.get_or_404(ship_id)
+    return make_response(jsonify(ship.to_dict()), 200)
 
 @app.route('/signup', methods=['POST'])
 def sign_up():
@@ -68,16 +66,20 @@ def sign_up():
 
 @app.route('/login', methods=['POST'])
 def login():
-    data = request.get_json()
+    data = request.json
     email = data.get('email')
     password = data.get('password')
+
+    if not email or not password:
+        return jsonify({'success': False, 'message': 'Email and password are required'}), 400
+
     user = User.query.filter_by(email=email).first()
 
-    if user and user.authenticate(password):
-        session['user_id'] = user.id
-        return jsonify({'success': True})
+    if not user or not user.authenticate(password):
+        return jsonify({'success': False, 'message': 'Invalid email or password'}), 401
 
-    return jsonify({'success': False, 'message': 'Invalid email or password'}), 401
+    session['user_id'] = user.id
+    return jsonify({'success': True, 'message': 'Login successful'})
 
 @app.route('/checksession', methods=['GET'])
 def check_session():
@@ -93,6 +95,47 @@ def logout():
     session.pop('user_id', None)
     return jsonify({"message": "Logged out successfully", "action": "prompt_login"}), 200
 
-# Run the app
+@app.route('/transactions', methods=['POST'])
+def create_transaction():
+    user_id = session.get('user_id')
+    if not user_id:
+        return jsonify({'error': 'Unauthorized'}), 401
+
+    data = request.json
+    new_transaction = Transaction(user_id=user_id, amount=data['amount'], description=data['description'])
+
+    try:
+        db.session.add(new_transaction)
+        db.session.commit()
+        return jsonify({'message': 'Transaction created successfully!'}), 201
+    except SQLAlchemyError as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/transactions', methods=['GET'])
+def get_transactions():
+    user_id = session.get('user_id')
+    if not user_id:
+        return jsonify({'error': 'Unauthorized'}), 401
+
+    transactions = Transaction.query.filter_by(user_id=user_id).all()
+    transactions_data = [{
+        'id': transaction.id,
+        'amount': transaction.amount,
+        'description': transaction.description,
+        'created_at': transaction.created_at
+    } for transaction in transactions]
+    
+    return make_response(jsonify(transactions_data), 200)
+
+@app.route('/user', methods=['GET'])
+def user_details():
+    user_id = session.get('user_id')
+    if not user_id:
+        return jsonify({'error': 'Unauthorized'}), 401
+
+    user = User.query.get(user_id)
+    return make_response(jsonify(user.to_dict()), 200)
+
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

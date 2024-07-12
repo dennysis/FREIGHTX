@@ -50,7 +50,6 @@ if __name__ == '__main__':
         db.session.add_all(users)
         db.session.commit()
         print("Users seeding complete.")
-        
         ports=[
         Port(name=fake.name(), location=fake.city(), image_url="https://i.pinimg.com/236x/7e/59/90/7e59907afe21a134ef14708363e19097.jpg"),
         Port(name=fake.name(), location=fake.city(), image_url="https://i.pinimg.com/236x/82/2d/4a/822d4afeb757402d3502248c0d52d9c0.jpg"),
@@ -79,12 +78,36 @@ if __name__ == '__main__':
         Port(name=fake.name(), location=fake.city(), image_url="https://i.pinimg.com/236x/85/d5/84/85d5842f2b0c482816554bac98f8b2ca.jpg"),
         Port(name=fake.name(), location=fake.city(), image_url="https://i.pinimg.com/236x/f0/42/97/f04297e09bb0ac138fbbded1e19b81ed.jpg"),
         Port(name=fake.name(), location=fake.city(), image_url="https://i.pinimg.com/236x/86/09/2d/86092dfef0b5958b35932c180e560aa4.jpg")
-        ]
+    ]
+    
         
         db.session.add_all(ports)
         db.session.commit()
         print("Ports seeding complete.")
 
+        ships = []
+        for _ in range(100):
+            total_tickets = randint(1000, 10000)
+            available_tickets = randint(0, total_tickets - 1)
+            port_ids = rc(ports, k=2)  # Choose two different ports
+
+            ship = Ship(
+                name=fake.name(),
+                capacity_weight=randint(0, 78000),
+                current_weight=randint(0, 78000),
+                total_tickets=total_tickets,
+                available_tickets=available_tickets,
+                category=rc(['cargo', 'passenger']),
+                port_from_id=port_ids[0].id,
+                port_to_id=port_ids[1].id,
+                price=randint(1000, 10000),
+                contractor_id=randint(1, len(contractors)),
+            )
+            ships.append(ship)
+        
+        db.session.add_all(ships)
+        db.session.commit()
+        print("Ships seeding complete.")
 
         passengers = [
             Passenger(
@@ -92,7 +115,7 @@ if __name__ == '__main__':
                 ticket_number=fake.bothify(text='???-########'),
                 cost=fake.pyfloat(left_digits=3, right_digits=2, positive=True, min_value=100, max_value=1000),
                 destination=fake.city(),
-                ship_id=randint(1, 100)
+                ship_id=rc(ships).id
             )
             for _ in range(100)
         ]
@@ -101,10 +124,9 @@ if __name__ == '__main__':
         db.session.commit()
         print("Passengers seeding complete.")
 
-        
         packages = [
             Package(
-                ship_id=randint(1, 100), 
+                ship_id=rc(ships).id, 
                 destination=fake.city(),
                 price=randint(100, 1000),
                 status=rc(["Shipped", "Pending", "Delivered"]),
@@ -116,25 +138,5 @@ if __name__ == '__main__':
         db.session.add_all(packages)
         db.session.commit()
         print("Packages seeding complete.")
-
-        ships = []
-        for _ in range(100):
-            total_tickets = randint(1000, 10000)
-            available_tickets = randint(0, total_tickets - 1)
-            ship = Ship(
-                name=fake.name(),
-                capacity_weight=randint(0, 78000),
-                current_weight=randint(0, 78000),
-                total_tickets=total_tickets,
-                available_tickets=available_tickets,
-                category=rc(['cargo', 'passenger']),
-                port_id=randint(1, 26),
-                contractor_id=randint(1, 20),
-            )
-            ships.append(ship)
-        
-        db.session.add_all(ships)
-        db.session.commit()
-        print("Ships seeding complete.")
 
         print("Seeding complete!")
