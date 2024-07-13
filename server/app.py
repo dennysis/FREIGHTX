@@ -126,13 +126,31 @@ def create_transaction():
 def get_users(): 
         users = User.query.all()
         return jsonify([user.to_dict() for user in users])
-@app.route("/users/<int:user_id>", methods=["GET"])
+@app.route("/users/<int:user_id>", methods=["GET","PATCH"])
 def get_user(user_id):
-    user = User.query.get(user_id)
-    if user:
-        return jsonify(user.to_dict())
-    else:
-        return jsonify({"error": "User not found"}), 404
+        if request.method == "GET":
+            user = User.query.get(user_id)
+            if not user:
+                return jsonify({"error": "User not found"}), 404
+            return jsonify(user.to_dict())
+        elif request.method == "PATCH":
+            user = User.query.get(user_id)
+            if not user:
+                    return jsonify({"error": "User not found"}), 404
+                
+            data = request.get_json()
+            balance = data.get('balance')
+
+            if balance is not None:
+                    user.balance = balance
+                    try:
+                        db.session.commit()
+                        return jsonify(user.to_dict()), 200
+                    except SQLAlchemyError as e:
+                        db.session.rollback()
+                        return jsonify({'error': str(e)}), 500
+
+            return jsonify({"error": "Invalid data"}), 404
 @app.route('/transactions', methods=['GET'])
 def get_transactions():
     user_id = session.get('user_id')
