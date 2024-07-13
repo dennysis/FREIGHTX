@@ -1,4 +1,6 @@
-import { useState } from "react";
+// Auth.js
+
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "../css/login.css"; // Ensure this CSS file has the necessary styles
 
@@ -16,21 +18,32 @@ function Auth({ onLogin, isLogin }) {
         const url = isLoginMode ? "/login" : "/signup";
         const body = isLoginMode ? { email, password } : { username, email, password, balance };
 
+        console.log("Sending request to:", url);
+        console.log("Request body:", body);
+
         fetch(url, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(body),
-        }).then((r) => {
-            if (r.ok) {
-                r.json().then((user) => {
-                    onLogin(user);
-                    history.push("/home");
+        })
+        .then((response) => {
+            if (!response.ok) {
+                return response.text().then((text) => {
+                    throw new Error(`Error: ${response.status} - ${text}`);
                 });
-            } else {
-                r.json().then((err) => setError(err.error));
             }
+            return response.json();
+        })
+        .then((user) => {
+            console.log("Login/Signup successful:", user);
+            onLogin(user);
+            history.push("/home");
+        })
+        .catch((err) => {
+            console.error("Error:", err);
+            setError(err.message);
         });
     }
 

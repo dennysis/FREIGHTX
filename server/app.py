@@ -86,7 +86,7 @@ def login():
 
     user = User.query.filter_by(email=email).first()
 
-    if not user or not user.authenticate(password):
+    if not user or not bcrypt.check_password_hash(user._password_hash, password):
         return jsonify({'success': False, 'message': 'Invalid email or password'}), 401
 
     session['user_id'] = user.id
@@ -122,7 +122,17 @@ def create_transaction():
     except SQLAlchemyError as e:
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
-
+@app.route("/users", methods=["GET"])
+def get_users(): 
+        users = User.query.all()
+        return jsonify([user.to_dict() for user in users])
+@app.route("/users/<int:user_id>", methods=["GET"])
+def get_user(user_id):
+    user = User.query.get(user_id)
+    if user:
+        return jsonify(user.to_dict())
+    else:
+        return jsonify({"error": "User not found"}), 404
 @app.route('/transactions', methods=['GET'])
 def get_transactions():
     user_id = session.get('user_id')
