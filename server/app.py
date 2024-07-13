@@ -6,7 +6,7 @@ from flask_restful import Resource
 
 from config import app, db, api, bcrypt
 
-from models import User, Ship, Port, Transaction
+from models import User, Ship, Port, Transaction,Contractor
 
 @app.route('/ships', methods=['GET'])
 def get_ships():
@@ -19,6 +19,11 @@ def get_ports():
     ports = Port.query.all()
     port_data = [port.to_dict() for port in ports]
     return make_response(jsonify(port_data), 200)
+@app.route('/contractors', methods=['GET'])
+def get_contractors():
+    contractors = Contractor.query.all()
+    contractor_data = [contractor.to_dict() for contractor in contractors]
+    return make_response(jsonify(contractor_data), 200)
 @app.route('/ports/<int:port_id>', methods=['GET'])
 def get_port_by_id(port_id):
     port = Port.query.filter_by(id=port_id).first()  # Adjusted filter_by to filter by port_id
