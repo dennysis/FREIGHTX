@@ -42,7 +42,7 @@ if __name__ == '__main__':
             user = User(
                 name=fake.name(),
                 email=fake.email(),
-                _password_hash=fake.password(length=16),
+                password=fake.password(length=16),
                 balance=randint(1000, 10000)
             )
             users.append(user)

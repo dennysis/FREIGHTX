@@ -13,9 +13,27 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    // Check session when component mounts
+    checkSession();
+
+    // Add event listener for when user is about to leave the page
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      handleLogout();
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    // Cleanup function to remove event listener
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
+  const checkSession = () => {
     fetch("/checksession", {
       method: "GET",
-      credentials: "include",  // Include credentials for cookies
+      credentials: "include",
     })
       .then((response) => {
         if (response.ok) {
@@ -27,9 +45,9 @@ function App() {
       .then((user) => setUser(user))
       .catch((error) => {
         console.error("Session check error:", error);
-        setUser(null); // Ensure user state is reset if session check fails
+        setUser(null);
       });
-  }, []);
+  };
 
   const handleLogout = () => {
     fetch("/logout", {
@@ -37,11 +55,11 @@ function App() {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",  // Include credentials for cookies
+      credentials: "include",
     })
       .then((response) => {
         if (response.ok) {
-          setUser(null); // Reset user state on successful logout
+          setUser(null);
         }
       })
       .catch((error) => console.error("Logout error:", error));
@@ -52,20 +70,42 @@ function App() {
       <Navbar user={user} onLogout={handleLogout} />
       <Switch>
         <Route path="/login">
-          {user ? <Redirect to="/home" /> : <Auth onLogin={setUser} isLogin={true} />}
+          {user ? (
+            <Redirect to="/home" />
+          ) : (
+            <Auth onLogin={setUser} isLogin={true} />
+          )}
         </Route>
         <Route path="/signup">
-          {user ? <Redirect to="/home" /> : <Auth onLogin={setUser} isLogin={false} />}
+          {user ? (
+            <Redirect to="/home" />
+          ) : (
+            <Auth onLogin={setUser} isLogin={false} />
+          )}
         </Route>
         <Route path="/home">
           {user ? <Home user={user} /> : <Redirect to="/login" />}
         </Route>
-        <Route path="/ports/:id/ships" render={(props) => (
-          user ? <Shiplist category="cargo" {...props} /> : <Redirect to="/login" />
-        )} />
-        <Route path="/ports/:id/ships" render={(props) => (
-          user ? <Shiplist category="passenger" {...props} /> : <Redirect to="/login" />
-        )} />
+        <Route
+          path="/ports/:id/ships"
+          render={(props) =>
+            user ? (
+              <Shiplist category="cargo" {...props} />
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/ports/:id/ships"
+          render={(props) =>
+            user ? (
+              <Shiplist category="passenger" {...props} />
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
+        />
         <Route path="/port">
           {user ? <Ports user={user} /> : <Redirect to="/login" />}
         </Route>

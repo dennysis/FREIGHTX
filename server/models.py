@@ -1,9 +1,6 @@
-# models.py
-
 from sqlalchemy_serializer import SerializerMixin
-from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.ext.associationproxy import association_proxy
-from config import db, bcrypt
+from config import db
 
 class User(db.Model, SerializerMixin):
     __tablename__ = "users"
@@ -11,27 +8,14 @@ class User(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
-    _password_hash = db.Column(db.String, nullable=False)
+    password = db.Column(db.String, nullable=False)
     balance = db.Column(db.Integer, nullable=False)
     passengers = db.relationship('Passenger', back_populates='user')
     ships = association_proxy('passengers','ship')
     transactions = db.relationship('Transaction', back_populates='user')  
 
-    @hybrid_property
-    def password_hash(self):
-        raise AttributeError('Password may not be viewed.')
-
-    @password_hash.setter
-    def password_hash(self, password):
-        password_hash = bcrypt.generate_password_hash(password.encode('utf-8'))
-        self._password_hash = password_hash.decode('utf-8')
-
-    def authenticate(self, password):
-        return bcrypt.check_password_hash(self._password_hash, password.encode('utf-8'))
-
     def __repr__(self):
         return f'<User {self.name}>'
-
 
 class Passenger(db.Model, SerializerMixin):
     __tablename__ = "passengers"
@@ -86,11 +70,9 @@ class Ship(db.Model):
                 'id': self.port_to.id,
                 'name': self.port_to.name,
             },
-            'contractor_id': self.contractor_id,
-            'price': self.price
+            'contractor_id': self.contractor_id
         }
 
-    
 class Port(db.Model, SerializerMixin):
     __tablename__ = "ports"   
     serialize_rules = ('-ships_departing.port_from', '-ships_arriving.port_to') 

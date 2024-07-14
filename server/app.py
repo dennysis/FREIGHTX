@@ -4,9 +4,9 @@ from datetime import datetime
 from flask import request, jsonify, session, make_response
 from flask_restful import Resource
 
-from config import app, db, api, bcrypt
+from config import app, db, api
 
-from models import User, Ship, Port, Transaction,Contractor
+from models import User, Ship, Port, Transaction, Contractor
 
 @app.route('/ships', methods=['GET'])
 def get_ships():
@@ -19,18 +19,20 @@ def get_ports():
     ports = Port.query.all()
     port_data = [port.to_dict() for port in ports]
     return make_response(jsonify(port_data), 200)
+
 @app.route('/contractors', methods=['GET'])
 def get_contractors():
     contractors = Contractor.query.all()
     contractor_data = [contractor.to_dict() for contractor in contractors]
     return make_response(jsonify(contractor_data), 200)
+
 @app.route('/ports/<int:port_id>', methods=['GET'])
 def get_port_by_id(port_id):
-    port = Port.query.filter_by(id=port_id).first()  # Adjusted filter_by to filter by port_id
+    port = Port.query.filter_by(id=port_id).first()
     if not port:
         return make_response(jsonify({'error': 'Port not found'}), 404)
-    
     return make_response(jsonify(port.to_dict()), 200)
+
 @app.route('/ports/<int:port_id>/ships', methods=['GET'])
 def get_ships_by_port(port_id):
     category = request.args.get('category')
@@ -60,7 +62,7 @@ def sign_up():
     new_user = User(
         name=name,
         email=email,
-        _password_hash=password,
+        password=password,
         balance=balance,
     )
 
@@ -84,13 +86,18 @@ def login():
     if not email or not password:
         return jsonify({'success': False, 'message': 'Email and password are required'}), 400
 
-    user = User.query.filter_by(email=email).first()
+    user = User.query.filter_by(email=email, password=password).first()
 
-    if not user or not bcrypt.check_password_hash(user._password_hash, password):
+    if not user:
         return jsonify({'success': False, 'message': 'Invalid email or password'}), 401
 
     session['user_id'] = user.id
     return jsonify({'success': True, 'message': 'Login successful'})
+
+@app.route('/logout', methods=['POST'])
+def logout():
+    session.clear()
+    return jsonify({"message": "Logged out successfully"}), 200
 
 @app.route('/checksession', methods=['GET'])
 def check_session():
@@ -100,11 +107,6 @@ def check_session():
         return make_response(jsonify(user.to_dict()), 200)
     else:
         return jsonify({"error": "Unauthorized"}), 401
-
-@app.route('/logout', methods=['POST'])
-def logout():
-    session.pop('user_id', None)
-    return jsonify({"message": "Logged out successfully", "action": "prompt_login"}), 200
 
 @app.route('/transactions', methods=['POST'])
 def create_transaction():
@@ -122,35 +124,38 @@ def create_transaction():
     except SQLAlchemyError as e:
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
+
 @app.route("/users", methods=["GET"])
 def get_users(): 
-        users = User.query.all()
-        return jsonify([user.to_dict() for user in users])
+    users = User.query.all()
+    return jsonify([user.to_dict() for user in users])
+
 @app.route("/users/<int:user_id>", methods=["GET","PATCH"])
 def get_user(user_id):
-        if request.method == "GET":
-            user = User.query.get(user_id)
-            if not user:
-                return jsonify({"error": "User not found"}), 404
-            return jsonify(user.to_dict())
-        elif request.method == "PATCH":
-            user = User.query.get(user_id)
-            if not user:
-                    return jsonify({"error": "User not found"}), 404
-                
-            data = request.get_json()
-            balance = data.get('balance')
+    if request.method == "GET":
+        user = User.query.get(user_id)
+        if not user:
+            return jsonify({"error": "User not found"}), 404
+        return jsonify(user.to_dict())
+    elif request.method == "PATCH":
+        user = User.query.get(user_id)
+        if not user:
+            return jsonify({"error": "User not found"}), 404
+            
+        data = request.get_json()
+        balance = data.get('balance')
 
-            if balance is not None:
-                    user.balance = balance
-                    try:
-                        db.session.commit()
-                        return jsonify(user.to_dict()), 200
-                    except SQLAlchemyError as e:
-                        db.session.rollback()
-                        return jsonify({'error': str(e)}), 500
+        if balance is not None:
+            user.balance = balance
+            try:
+                db.session.commit()
+                return jsonify(user.to_dict()), 200
+            except SQLAlchemyError as e:
+                db.session.rollback()
+                return jsonify({'error': str(e)}), 500
 
-            return jsonify({"error": "Invalid data"}), 404
+        return jsonify({"error": "Invalid data"}), 404
+
 @app.route('/transactions', methods=['GET'])
 def get_transactions():
     user_id = session.get('user_id')
