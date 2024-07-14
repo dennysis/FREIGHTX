@@ -86,7 +86,8 @@ class Ship(db.Model):
                 'id': self.port_to.id,
                 'name': self.port_to.name,
             },
-            'contractor_id': self.contractor_id
+            'contractor_id': self.contractor_id,
+            'price': self.price
         }
 
     

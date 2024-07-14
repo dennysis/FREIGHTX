@@ -74,8 +74,11 @@ function Ship() {
           <p id="category">Category: {ship.category}</p>
           <p id="departure">Departure: {ship.port_from.name}</p>
           <p id="arrival">Arrival: {ship.port_to.name}</p>
-          <p id="total-tickets">Total Tickets: {ship.total_tickets}</p>
-          <p id="remaining-tickets">Remaining Tickets: {ship.available_tickets}</p>
+          <div id="tickets">
+            <p id="total-tickets">Total Tickets: {ship.total_tickets}</p>
+            <p id="remaining-tickets">Remaining Tickets: {ship.available_tickets}</p>
+          </div>
+          <p id="price">Price: ${ship.price}</p>
           {ship.category === "passenger" && (
             <div id="quantity">
               <label>Number of Tickets</label>

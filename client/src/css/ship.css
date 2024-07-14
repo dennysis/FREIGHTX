@@ -20,6 +20,7 @@
   
   .ship-details h1 {
     margin-top: 0;
+    text-decoration: wavy underline;
   }
   
   .ship-details p {
@@ -114,4 +115,13 @@
     font-style: italic;
     font-size: larger;
   }
-  
+  #price{
+    background-color: rgb(207, 181, 64);
+    padding: 5px;
+    font-size: larger;
+  }
+  #tickets{
+    margin-top: 10px;
+    font-size: 18px;
+    background-color: #b9b71de7;
+  }

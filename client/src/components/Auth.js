@@ -1,5 +1,3 @@
-// Auth.js
-
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "../css/login.css"; // Ensure this CSS file has the necessary styles
@@ -54,6 +52,10 @@ function Auth({ onLogin, isLogin }) {
 
     return (
         <div id="login">
+            <video autoPlay muted loop id="background-video">
+                <source src="https://static.videezy.com/system/resources/previews/000/007/218/original/CIRCULAR_INTERFACE_HUD.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
             <div className="navbar">
                 <img src="https://i.pinimg.com/564x/86/4a/3e/864a3e877dc16143e216b145da06a336.jpg" alt="Logo" className="logo" />
                 <span className="brand-name">FREIGHTX</span>
