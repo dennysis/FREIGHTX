@@ -6,7 +6,7 @@ from flask_restful import Resource
 
 from config import app, db, api
 
-from models import User, Ship, Port, Transaction, Contractor
+from models import User, Ship, Port, Transaction, Contractor, Package
 
 @app.route('/ships', methods=['GET'])
 def get_ships():
@@ -180,6 +180,43 @@ def user_details():
 
     user = User.query.get(user_id)
     return make_response(jsonify(user.to_dict()), 200)
+
+@app.route('/ships/<int:ship_id>/buy_ticket', methods=['PATCH'])
+def buy_ticket(ship_id):
+    ship = Ship.query.get_or_404(ship_id)
+
+    if ship.total_tickets > 0:
+        ship.total_tickets -= 1
+        db.session.commit()
+        return make_response(jsonify({'message': 'Ticket purchased successfully', 'total_tickets': ship.total_tickets}), 200)
+    else:
+        return make_response(jsonify({'error': 'No tickets available'}), 400)
+    
+@app.route('/ships/<int:ship_id>/add_weight', methods=['PATCH'])
+def add_cargo(ship_id):
+    data = request.get_json()
+    package_id = data.get('package_id')
+
+    if package_id is None:
+        return make_response(jsonify({'error': 'Package ID is required'}), 400)
+
+    package = Package.query.get_or_404(package_id)
+
+    if package.ship_id != ship_id:
+        return make_response(jsonify({'error': 'Package does not belong to this ship'}), 400)
+
+    ship = Ship.query.get_or_404(ship_id)
+
+    if ship.current_weight + package.weight > ship.capacity_weight:
+        return make_response(jsonify({'error': 'Cargo exceeds ship capacity'}), 400)
+
+    ship.current_weight += package.weight
+    db.session.commit()
+
+    return make_response(jsonify({
+        'message': 'Cargo added successfully',
+        'current_weight': ship.current_weight
+    }), 200)
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
