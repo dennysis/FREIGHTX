@@ -2,17 +2,29 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { useParams } from "react-router-dom";
-import '../css/ship.css';
+import "../css/ship.css";
 
 const contractors = [
-  "Maersk", "Mediterranean Shipping Company (MSC)", "CMA CGM Group",
-  "COSCO Shipping", "Hapag-Lloyd", "ONE (Ocean Network Express)",
-  "Evergreen Marine", "Yang Ming Marine Transport", "Hyundai Merchant Marine",
-  "ZIM Integrated Shipping Services", "Pacific International Lines (PIL)",
-  "Kawasaki Kisen Kaisha, Ltd. (K Line)", "Mitsui O.S.K. Lines (MOL)",
-  "Nippon Yusen Kabushiki Kaisha (NYK Line)", "HMM (Hyundai Merchant Marine)",
-  "Wan Hai Lines", "IRISL Group", "Hansa Heavy Lift", "Swire Shipping",
-  "OOCL (Orient Overseas Container Line)"
+  "Maersk",
+  "Mediterranean Shipping Company (MSC)",
+  "CMA CGM Group",
+  "COSCO Shipping",
+  "Hapag-Lloyd",
+  "ONE (Ocean Network Express)",
+  "Evergreen Marine",
+  "Yang Ming Marine Transport",
+  "Hyundai Merchant Marine",
+  "ZIM Integrated Shipping Services",
+  "Pacific International Lines (PIL)",
+  "Kawasaki Kisen Kaisha, Ltd. (K Line)",
+  "Mitsui O.S.K. Lines (MOL)",
+  "Nippon Yusen Kabushiki Kaisha (NYK Line)",
+  "HMM (Hyundai Merchant Marine)",
+  "Wan Hai Lines",
+  "IRISL Group",
+  "Hansa Heavy Lift",
+  "Swire Shipping",
+  "OOCL (Orient Overseas Container Line)",
 ];
 
 function Ship() {
@@ -21,6 +33,8 @@ function Ship() {
   const [quantity, setQuantity] = useState(0);
   const [cargoType, setCargoType] = useState(contractors[0]);
   const [shipImage, setShipImage] = useState("");
+  const [showPopup, setShowPopup] = useState(false); // New state for popup visibility
+  const [bookingDetails, setBookingDetails] = useState({}); // State to store booking details
 
   useEffect(() => {
     fetch(`http://127.0.0.1:5555/ships/${id}`)
@@ -30,9 +44,13 @@ function Ship() {
         setShip(data);
         // Determine which image to display based on ship category
         if (data.category === "passenger") {
-          setShipImage("https://i.pinimg.com/564x/04/0b/a3/040ba35d25e71f55a16d44b32e182062.jpg");
+          setShipImage(
+            "https://i.pinimg.com/564x/04/0b/a3/040ba35d25e71f55a16d44b32e182062.jpg"
+          );
         } else if (data.category === "cargo") {
-          setShipImage("https://i.pinimg.com/564x/09/08/11/09081161ae49ef96bc251cdd34279e8d.jpg");
+          setShipImage(
+            "https://i.pinimg.com/564x/09/08/11/09081161ae49ef96bc251cdd34279e8d.jpg"
+          );
         }
       })
       .catch((error) => {
@@ -48,14 +66,36 @@ function Ship() {
     setCargoType(e.target.value);
   };
 
+  const generateRandomTicketNumber = () => {
+    return Math.floor(Math.random() * 9000000000) + 1000000000; // Generate a 10-digit random number
+  };
+
+  const generateRandomDateTime = () => {
+    const start = new Date();
+    const end = new Date(start.getTime() + 30 * 24 * 60 * 60 * 1000); // Within the next 30 days
+    const randomDate = new Date(
+      start.getTime() + Math.random() * (end.getTime() - start.getTime())
+    );
+    return randomDate.toLocaleString();
+  };
+
   const handleBooking = () => {
     // Implement booking logic here based on ship type
-    // For demonstration purposes, logging the booking details
-    if (ship.category === "passenger") {
-      console.log(`Booked ${quantity} tickets for ${ship.name}`);
-    } else if (ship.category === "cargo") {
-      console.log(`Booked cargo type ${cargoType} for ${ship.name}`);
-    }
+    const ticketNumber = generateRandomTicketNumber();
+    const bookingInfo = {
+      shipName: ship.name,
+      ticketNumber,
+      departurePort: ship.port_from.name,
+      departureTime: generateRandomDateTime(),
+      arrivalPort: ship.port_to.name,
+      arrivalTime: generateRandomDateTime(),
+    };
+    setBookingDetails(bookingInfo);
+    setShowPopup(true); // Show popup when booking is made
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
   };
 
   if (!ship) {
@@ -76,7 +116,9 @@ function Ship() {
           <p id="arrival">Arrival: {ship.port_to.name}</p>
           <div id="tickets">
             <p id="total-tickets">Total Tickets: {ship.total_tickets}</p>
-            <p id="remaining-tickets">Remaining Tickets: {ship.available_tickets}</p>
+            <p id="remaining-tickets">
+              Remaining Tickets: {ship.available_tickets}
+            </p>
           </div>
           <p id="price">Price: ${ship.price}</p>
           {ship.category === "passenger" && (
@@ -91,7 +133,7 @@ function Ship() {
           )}
           {ship.category === "cargo" && (
             <div id="brand">
-              <label htmlFor="cargoType">Select Cargo Type:</label>
+              <label htmlFor="cargoType">Select Shipping Company:</label>
               <select
                 id="cargoType"
                 value={cargoType}
@@ -106,13 +148,39 @@ function Ship() {
             </div>
           )}
           <div id="buttons">
-            <button onClick={handleBooking}>
-              Book
-            </button>
+            <button onClick={handleBooking}>Book</button>
           </div>
         </div>
       </div>
       <Footer />
+      {showPopup && (
+        <div className="popup">
+          <div className="popup-content">
+            <h2>Booking successful!</h2>
+
+            <p>
+              <strong>Ship Name:</strong> {bookingDetails.shipName}
+            </p>
+            <p>
+              <strong>Ticket Number:</strong> {bookingDetails.ticketNumber}
+            </p>
+            <p>
+              <strong>Departure Port:</strong> {bookingDetails.departurePort}
+            </p>
+            <p>
+              <strong>Departure Time:</strong> {bookingDetails.departureTime}
+            </p>
+            <p>
+              <strong>Arrival Port:</strong> {bookingDetails.arrivalPort}
+            </p>
+            <p>
+              <strong>Arrival Time:</strong> {bookingDetails.arrivalTime}
+            </p>
+            <h3>Thank you for bookig with us!</h3>
+            <button onClick={closePopup}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
