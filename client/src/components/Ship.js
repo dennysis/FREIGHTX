@@ -80,7 +80,6 @@ function Ship() {
   };
 
   const handleBooking = () => {
-    // Implement booking logic here based on ship type
     const ticketNumber = generateRandomTicketNumber();
     const bookingInfo = {
       shipName: ship.name,
@@ -90,8 +89,34 @@ function Ship() {
       arrivalPort: ship.port_to.name,
       arrivalTime: generateRandomDateTime(),
     };
+
     setBookingDetails(bookingInfo);
-    setShowPopup(true); // Show popup when booking is made
+    setShowPopup(true);
+  
+
+    fetch(`http://127.0.0.1:5555/ships/${id}/buy_ticket`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ quantity }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          alert(data.error);
+        } else {
+          setBookingDetails(bookingInfo);
+          setShowPopup(true);
+          setShip((prevShip) => ({
+            ...prevShip,
+            available_tickets: data.available_tickets,
+          }));
+        }
+      })
+      .catch((error) => {
+        console.error("Error during booking:", error);
+      });
   };
 
   const closePopup = () => {
@@ -101,6 +126,7 @@ function Ship() {
   if (!ship) {
     return <div>Loading...</div>;
   }
+
 
   return (
     <div>
@@ -176,7 +202,7 @@ function Ship() {
             <p>
               <strong>Arrival Time:</strong> {bookingDetails.arrivalTime}
             </p>
-            <h3>Thank you for bookig with us!</h3>
+            <h3>Thank you for booking with us!</h3>
             <button onClick={closePopup}>Close</button>
           </div>
         </div>

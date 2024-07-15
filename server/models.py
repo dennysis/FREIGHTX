@@ -49,7 +49,8 @@ class Ship(db.Model):
     port_from = db.relationship('Port', foreign_keys=[port_from_id], back_populates='ships_departing')
     port_to = db.relationship('Port', foreign_keys=[port_to_id], back_populates='ships_arriving')
     contractor = db.relationship('Contractor', back_populates='ships')
-    
+    transactions = db.relationship('Transaction', back_populates='ship')
+
     def __repr__(self):
         return f'<Ship {self.name}>'
 
@@ -60,6 +61,7 @@ class Ship(db.Model):
             'capacity_weight': self.capacity_weight,
             'current_weight': self.current_weight,
             'total_tickets': self.total_tickets,
+            'price': self.price,
             'available_tickets': self.available_tickets,
             'category': self.category,
             'port_from': {
@@ -72,7 +74,6 @@ class Ship(db.Model):
             },
             'contractor_id': self.contractor_id
         }
-
 class Port(db.Model, SerializerMixin):
     __tablename__ = "ports"   
     serialize_rules = ('-ships_departing.port_from', '-ships_arriving.port_to') 
@@ -119,11 +120,29 @@ class UserShipAssociation(db.Model, SerializerMixin):
 class Transaction(db.Model):
     __tablename__ = 'transactions'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    amount = db.Column(db.Integer, nullable=False)
-    description = db.Column(db.String(255))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    amount = db.Column(db.Integer)
+    category = db.Column(db.String)
+    ship_id = db.Column(db.Integer, db.ForeignKey('ships.id'))
     created_at = db.Column(db.DateTime, default=db.func.now())
     user = db.relationship('User', back_populates='transactions')  
+    ship = db.relationship('Ship', back_populates='transactions')
 
     def __repr__(self):
         return f'<Transaction {self.id}>'
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'amount': self.amount,
+            'category': self.category,
+            'ship_id': self.ship_id,
+            'created_at': self.created_at,
+            'ship': {
+                'id': self.ship.id,
+                'name': self.ship.name
+            }
+        }
+
+Ship.transactions = db.relationship('Transaction', back_populates='ship')

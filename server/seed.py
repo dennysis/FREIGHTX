@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Standard library imports
-from random import randint, sample as rc
+from random import randint, choice, sample as rc
 
 # Remote library imports
 from faker import Faker
@@ -139,13 +139,19 @@ if __name__ == '__main__':
         db.session.commit()
         print("Packages seeding complete.")
 
-        transactions = []
+        transactions = []        
         for user in users:
-            for _ in range(10): 
-                amount=randint(10, 1000)
-                description=fake.sentence()
-                created_at=fake.date_time_between(start_date='-1y', end_date='now')
-                transaction=Transaction(user_id=user.id, amount=amount, description=description, created_at=created_at)
+            for _ in range(10):
+                amount = randint(10, 1000)
+                category=rc(['cargo', 'passenger'], 1)[0]  # Select 1 random category
+                created_at = fake.date_time_between(start_date='-1y', end_date='now')
+                transaction = Transaction(
+                    user_id=user.id,
+                    amount=amount,
+                    category=category,
+                    ship_id=rc(ships, 1)[0].id, 
+                    created_at=created_at
+                )
                 transactions.append(transaction)
 
         db.session.add_all(transactions)

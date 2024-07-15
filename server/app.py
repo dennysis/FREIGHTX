@@ -108,23 +108,6 @@ def check_session():
     else:
         return jsonify({"error": "Unauthorized"}), 401
 
-@app.route('/transactions', methods=['POST'])
-def create_transaction():
-    user_id = session.get('user_id')
-    if not user_id:
-        return jsonify({'error': 'Unauthorized'}), 401
-
-    data = request.json
-    new_transaction = Transaction(user_id=user_id, amount=data['amount'], description=data['description'])
-
-    try:
-        db.session.add(new_transaction)
-        db.session.commit()
-        return jsonify({'message': 'Transaction created successfully!'}), 201
-    except SQLAlchemyError as e:
-        db.session.rollback()
-        return jsonify({'error': str(e)}), 500
-
 @app.route("/users", methods=["GET"])
 def get_users(): 
     users = User.query.all()
@@ -184,39 +167,47 @@ def user_details():
 @app.route('/ships/<int:ship_id>/buy_ticket', methods=['PATCH'])
 def buy_ticket(ship_id):
     ship = Ship.query.get_or_404(ship_id)
-
-    if ship.total_tickets > 0:
-        ship.total_tickets -= 1
-        db.session.commit()
-        return make_response(jsonify({'message': 'Ticket purchased successfully', 'total_tickets': ship.total_tickets}), 200)
-    else:
-        return make_response(jsonify({'error': 'No tickets available'}), 400)
-    
-@app.route('/ships/<int:ship_id>/add_weight', methods=['PATCH'])
-def add_cargo(ship_id):
     data = request.get_json()
-    package_id = data.get('package_id')
+    quantity = data.get('quantity', 1)  # Default to 1 if not provided
 
-    if package_id is None:
-        return make_response(jsonify({'error': 'Package ID is required'}), 400)
+    if ship.category == 'cargo':
+        quantity = 1
+    else:
+        quantity = data.get("quantity")
 
-    package = Package.query.get_or_404(package_id)
+    if ship.available_tickets >= quantity:
+        try:
+            ship.available_tickets -= quantity
+            db.session.commit()
+            print(f"Successfully booked {quantity} ticket(s) for ship {ship.name}.")
+ 
+            user_id = session.get('user_id')
+            amount = 0
 
-    if package.ship_id != ship_id:
-        return make_response(jsonify({'error': 'Package does not belong to this ship'}), 400)
+            if ship.category == 'cargo':
+                amount = ship.price
+            elif ship.category == 'passenger':
+                amount = quantity * ship.price  # Assuming price is per ticket
 
-    ship = Ship.query.get_or_404(ship_id)
+            new_transaction = Transaction(
+                user_id=user_id,
+                amount=amount,
+                category=ship.category,
+                ship_id=ship.id
+            )
+    
+            db.session.add(new_transaction)
+            db.session.commit()
 
-    if ship.current_weight + package.weight > ship.capacity_weight:
-        return make_response(jsonify({'error': 'Cargo exceeds ship capacity'}), 400)
-
-    ship.current_weight += package.weight
-    db.session.commit()
-
-    return make_response(jsonify({
-        'message': 'Cargo added successfully',
-        'current_weight': ship.current_weight
-    }), 200)
-
+            return make_response(jsonify({
+                'message': 'Ticket(s) purchased and transaction created successfully',
+                'available_tickets': ship.available_tickets,
+                'transaction': new_transaction.to_dict()
+            }), 200)
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            return jsonify({'error': str(e)}), 500
+    else:
+        return make_response(jsonify({'error': 'Not enough tickets available'}), 400)
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
