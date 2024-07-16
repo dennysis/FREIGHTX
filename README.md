@@ -95,7 +95,6 @@ FREIGHTX/
 - `LICENSE.md`: Project license information
 - `Pipfile` and `Pipfile.lock`: Python dependency management
 - `package.json`: Node.js dependency management
-
 ## Technologies Used
 
 ### Languages
@@ -109,7 +108,7 @@ FREIGHTX/
 ### Frameworks
 <p align="center">
   <img src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Skills/Frontend/react-original-wordmark.svg" alt="React" width="48" height="48"/>
-  <img src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Skills/Backend/flask-original-wordmark.svg" alt="Flask" width="48" height="48"/>
+  <img src="https://www.vectorlogo.zone/logos/pocoo_flask/pocoo_flask-icon.svg" alt="Flask" width="48" height="48"/>
 </p>
 
 ### Database
