@@ -198,10 +198,11 @@ Install the necessary Node.js packages for the frontend development:
 
 Launch the React development server to view the application in your web browser:
 
-    npm start            
+    npm start      
+    
 After completing these steps:
-- The backend server should be running on [](http://localhost:5000)
-- The frontend should be accessible at [](http://localhost:3000)
+- The backend server should be running on [http://localhost:5000](http://localhost:5000)
+- The frontend should be accessible at [http://localhost:3000](http://localhost:3000)
 
 ## Authors
 
