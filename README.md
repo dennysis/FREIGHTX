@@ -33,24 +33,50 @@ FREIGHTX is a comprehensive system for managing parcel shipments and passenger b
 
 ## Project Structure
 
-```console
-$ tree -L 2
-$ # the -L argument limits the depth at which we look into the directory structure
-.
+```
+FREIGHTX/
+│
+├── client/
+│   ├── node_modules/
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── public/
+│   ├── README.md
+│   └── src/
+│       ├── components/
+│       │   ├── App.js
+│       │   ├── Auth.js
+│       │   ├── Footer.js
+│       │   ├── Home.js
+│       │   ├── Navbar.js
+│       │   ├── Passenger.js
+│       │   ├── Portcard.js
+│       │   ├── Ports.js
+│       │   ├── Ship.js
+│       │   ├── Shiplist.js
+│       │   └── User.js
+│       ├── css/
+│       ├── index.css
+│       ├── index.js
+│       └── pics/
+│
 ├── CONTRIBUTING.md
 ├── LICENSE.md
 ├── Pipfile
+├── Pipfile.lock
 ├── README.md
-├── client
-│   ├── README.md
-│   ├── package.json
-│   ├── public
-│   └── src
-└── server
+│
+└── server/
     ├── app.py
     ├── config.py
+    ├── instance/
+    │   └── app.db
+    ├── manage.py
+    ├── migrations/
     ├── models.py
+    ├── __pycache__/
     └── seed.py
+
 ```
 
 ### Key Directories and Files
