@@ -138,60 +138,46 @@ FREIGHTX/
 - Database: MySQL
 - Other: Git, Linux
 
-## Installation and Setup
+## Setup Instructions
 
-Backend Setup
-Clone the repository:
-bash
-Copy code
-git clone https://github.com/Kamau-sam/FREIGHTX.git
-cd FREIGHTX/server
+### Backend Setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Kamau-sam/FREIGHTX.git
+   cd FREIGHTX/server
+
 Install the dependencies:
-bash
-Copy code
-pipenv install
+bashCopypipenv install
+
 Activate the virtual environment:
-bash
-Copy code
-pipenv shell
+bashCopypipenv shell
+
 Set up the database:
-bash
-Copy code
-python manage.py db init
+bashCopypython manage.py db init
 python manage.py db migrate
 python manage.py db upgrade
-Seed the database:
-bash
-Copy code
-python seed.py
-Run the Flask server:
-bash
-Copy code
-flask run
-Frontend Setup
-Navigate to the client directory:
-bash
-Copy code
-cd ../client
-Install the dependencies:
-bash
-Copy code
-npm install
-Start the React development server:
-bash
-Copy code
-npm start
-## Running the Project
 
-1. Start the backend server:
-cd server
-flask run
-Copy
-2. In a new terminal, start the frontend:
-cd client
-npm start
-Copy
-3. Open `http://localhost:3000` in your browser.
+Seed the database:
+bashCopypython seed.py
+
+Run the Flask server:
+bashCopyflask run
+
+
+Frontend Setup
+
+Navigate to the client directory:
+bashCopycd ../client
+
+Install the dependencies:
+bashCopynpm install
+
+Start the React development server:
+bashCopynpm start
+
+
+After completing these steps, the backend server should be running on http://localhost:5000 and the frontend on http://localhost:3000.
 
 ## Authors
 
