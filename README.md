@@ -4,7 +4,11 @@
   <img src="client/src/pics/Freightx.gif" alt="Freightx.gif"/>
 </p>
 
-FREIGHTX is a comprehensive system for managing parcel shipments and passenger bookings. Users can log in, ship parcels, book tickets, and view real-time updates on budgets and ship capacities.
+Welcome to FREIGHTX, the ultimate solution for seamless parcel shipments and hassle-free passenger bookings. 
+With FREIGHTX, experience the convenience of managing your shipments and travel plans all in one place. 
+From secure user authentication to real-time updates on budgets and ship capacities, 
+FREIGHTX offers a comprehensive and intuitive platform to meet all your logistics and travel needs. 
+Join us and embark on a journey where efficiency meets reliability, and every shipment and booking is just a click away.
 
 ## Table of Contents
 
