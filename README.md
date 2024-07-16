@@ -140,44 +140,46 @@ FREIGHTX/
 
 ## Setup Instructions
 
-### Backend Setup
+#git clone https://github.com/Kamau-sam/FREIGHTX.git
+cd FREIGHTX/server
+Step 2: Install Dependencies
+Navigate to the server directory within the cloned repository and install the required Python packages using pipenv. Run the following command:
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Kamau-sam/FREIGHTX.git
-   cd FREIGHTX/server
+pipenv install
+Step 3: Activate the Virtual Environment
+Activate the virtual environment created by pipenv to ensure that the installed packages are accessible. Execute:
 
-Install the dependencies:
-bashCopypipenv install
+pipenv shell
+### Step 4: Set Up the Database
+Initialize the database, apply migrations, and upgrade the database schema by running the following commands:
 
-Activate the virtual environment:
-bashCopypipenv shell
-
-Set up the database:
-bashCopypython manage.py db init
+python manage.py db init
 python manage.py db migrate
 python manage.py db upgrade
+Step 5: Seed the Database
+Seed the database with initial data by executing:
 
-Seed the database:
-bashCopypython seed.py
+python seed.py
+Step 6: Run the Flask Server
+Start the Flask development server to begin serving the application:
 
-Run the Flask server:
-bashCopyflask run
-
-
+flask run
 Frontend Setup
+To set up the frontend part of the FreightX project, proceed with the following instructions:
 
-Navigate to the client directory:
-bashCopycd ../client
+Step 1: Navigate to the Client Directory
+Change your current working directory to the client folder located at the root of the project:
 
-Install the dependencies:
-bashCopynpm install
+cd ../client
+Step 2: Install Dependencies
+Install the necessary Node.js packages for the frontend development:
 
-Start the React development server:
-bashCopynpm start
+npm install
+Step 3: Start the React Development Server
+Launch the React development server to view the application in your web browser:
 
+npm start
 
-After completing these steps, the backend server should be running on http://localhost:5000 and the frontend on http://localhost:3000.
 
 ## Authors
 
