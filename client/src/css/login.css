@@ -1,8 +1,7 @@
-
 .navbar {
     width: 100%;
     height: 60px; 
-    background-color: skyblue; 
+    background-color: #1cafb9; /* Same color as footer */
     display: flex;
     align-items: center;
     padding: 0 20px; 
@@ -12,6 +11,7 @@
     left: 0;
     z-index: 2; 
 }
+
 .logo {
     height: 40px; 
     margin-right: 10px; 
@@ -21,7 +21,6 @@
     font-size: 24px; 
     font-weight: bold;
 }
-
 
 #login {
     display: flex;
@@ -46,16 +45,15 @@
     z-index: 0; 
 }
 
-.circle-container {
+.box-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.circle {
-    width: 300px; 
-    height: 300px; 
-    border-radius: 50%;
+.box {
+    width: 400px; 
+    height: auto; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,20 +67,12 @@
     z-index: 1; 
 }
 
-.left-login {
+.login-box {
     background-color: rgba(255, 255, 255, 0.8); 
 }
 
-.right-login {
-    background-color: rgba(135, 206, 235, 0.8); 
-}
-
-.left-signup {
+.signup-box {
     background-color: rgba(224, 130, 130, 0.8); 
-}
-
-.right-signup {
-    background-color: rgba(255, 255, 255, 0.8); 
 }
 
 #login-form {

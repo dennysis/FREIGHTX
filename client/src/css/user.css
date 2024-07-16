@@ -1,63 +1,44 @@
 .user-container {
-    display: flex;
-    align-items: center;
-    border: 5px solid black;
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px;
-    background-color: rgba(53, 190, 190, 0.603);
-    padding-top: 70px;
-    padding-bottom: 160px;
-  }
-  
-  .user-photo img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-  }
-  
-  .user-details {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    margin-left: 20px;
-  }
-  
-  .balance-bar {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-  }
-  
-  .balance-amount {
-    margin-left: 10px;
-    font-weight: bold;
-  }
-  
-  .deposit-bar {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  input[type="number"] {
-    margin-top: 10px;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  button {
-    margin-top: 10px;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
+  border: 5px solid black;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: rgba(53, 190, 190, 0.603);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.user-photo img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 20px;
+}
+
+.balance-bar {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.balance-amount {
+  font-weight: bold;
+}
+
+.deposit-bar {
+  margin-top: 10px;
+  width: 100%;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(90%);
+}

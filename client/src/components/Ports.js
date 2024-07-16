@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import PortCard from "./Portcard";
+import "../css/potcard.css";
+
 function Ports() {
     const  [ports, setPorts] = useState([]);
     useEffect(() => {
@@ -10,14 +12,15 @@ function Ports() {
     })
     return (
         <div>
-            <Navbar />
-            <h1 id="head">Port Hubs</h1>
-            <div className="ports-container">
-                {ports.map((port) => (
-                    <PortCard key={port.id} port={port} />
-                ))}
-            </div>
+          <Navbar />
+          <h1 id="head" className="mt-5">Port Hubs</h1> {/* Add margin-top class */}
+          <div className="ports-container">
+            {ports.map((port) => (
+              <PortCard key={port.id} port={port} />
+            ))}
+          </div>
         </div>
-    );
-}
+      );
+    }
+
 export default Ports

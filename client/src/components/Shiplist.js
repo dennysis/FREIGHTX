@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import Navbar from "./Navbar";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/shiplist.css"; // Import the CSS file
 
 function Shiplist() {

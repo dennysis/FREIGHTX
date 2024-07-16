@@ -59,31 +59,34 @@ function User() {
   return (
     <div>
       <Navbar />
-      <div className="user-container">
-        <div className="user-photo">
-          <img src="https://i.pinimg.com/564x/d9/7b/bb/d97bbb08017ac2309307f0822e63d082.jpg" alt="User" />
-        </div>
-        <div className="user-details">
-          <h1 id="user-name">{userData.name}</h1>
-          <p id="user-email">Email: {userData.email}</p>
-          <div className="balance-bar">
-            <span>Balance: </span>
-            <div className="balance-amount">${userData.balance}</div>
+      <div className="container user-container mt-5">
+        <div className="row align-items-center">
+          <div className="col-md-4 user-photo">
+            <img src="https://i.pinimg.com/564x/d9/7b/bb/d97bbb08017ac2309307f0822e63d082.jpg" alt="User" className="img-fluid rounded-circle" />
           </div>
-          <button onClick={() => setShowDepositBar(!showDepositBar)}>
-            {showDepositBar ? "Cancel" : "Deposit"}
-          </button>
-          {showDepositBar && (
-            <div className="deposit-bar">
-              <input 
-                type="number" 
-                value={depositAmount} 
-                onChange={handleDepositChange} 
-                placeholder="Deposit Amount" 
-              />
-              <button onClick={handleDeposit}>Confirm Deposit</button>
+          <div className="col-md-8 user-details">
+            <h1 id="user-name" className="display-4">{userData.name}</h1>
+            <p id="user-email" className="lead">Email: {userData.email}</p>
+            <div className="balance-bar">
+              <span className="h5">Balance:</span>
+              <div className="balance-amount h5 ml-2">${userData.balance}</div>
             </div>
-          )}
+            <button className="btn btn-primary mt-3" onClick={() => setShowDepositBar(!showDepositBar)}>
+              {showDepositBar ? "Cancel" : "Deposit"}
+            </button>
+            {showDepositBar && (
+              <div className="deposit-bar mt-3">
+                <input 
+                  type="number" 
+                  className="form-control mb-2"
+                  value={depositAmount} 
+                  onChange={handleDepositChange} 
+                  placeholder="Deposit Amount" 
+                />
+                <button className="btn btn-success" onClick={handleDeposit}>Confirm Deposit</button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
       <Footer />

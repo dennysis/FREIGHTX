@@ -5,10 +5,10 @@ import "../css/home.css"; // Import your CSS file for styling
 
 function Home({ user }) {
   return (
-    <div>
+    <div className="home-container d-flex flex-column">
       <Navbar user={user} />
 
-      <div className="section">
+      <div className="section flex-grow-1">
         <img
           id="pic1"
           src="https://i.pinimg.com/564x/15/e6/ef/15e6efdbcc393a442a894ca291b6d40a.jpg"
@@ -23,17 +23,15 @@ function Home({ user }) {
             for sending and receiving goods, as well as booking passenger ships
             between global destinations. Experience the convenience and
             efficiency of our cutting-edge logistics solutions, connecting you
-            to every corner of the globe with ease and reliability.{" "}
+            to every corner of the globe with ease and reliability.
           </p>
         </div>
       </div>
 
-      <div className="section alternate">
+      <div className="section alternate flex-grow-1">
         <div className="text">
           <h2 className="headers">Online bookings and plans</h2>
-          <p className="proverbs">
-            ~He who does not adapt to change is a fool~
-          </p>
+          <p className="proverbs">~He who does not adapt to change is a fool~</p>
           <p className="p">
             In light of current technologies and human behavior, we have become
             more and more accustomed to online services. In order to maintain
@@ -50,7 +48,7 @@ function Home({ user }) {
         />
       </div>
 
-      <div id="section2" className="section">
+      <div id="section2" className="section flex-grow-1">
         <img
           id="pic3"
           src="https://i.pinimg.com/564x/d5/a5/54/d5a55403bfc45d54f2fe7763b923cf40.jpg"
@@ -60,8 +58,7 @@ function Home({ user }) {
         <div className="text">
           <h2 className="headers">What are our Future Plans?</h2>
           <p className="proverbs">
-            ~The secret to getting results is to never stop making
-            improvements.~{" "}
+            ~The secret to getting results is to never stop making improvements.~
           </p>
           <p className="p">
             As a company, we are constantly seeking to improve our services.

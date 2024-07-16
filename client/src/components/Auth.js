@@ -90,94 +90,54 @@ function Auth({ onLogin, isLogin }) {
         />
         <span className="brand-name">FREIGHTX</span>
       </div>
-      <div className="circle-container">
-        <div className={`circle ${isLoginMode ? "left-login" : "left-signup"}`}>
-          {isLoginMode && (
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={handleSubmit}
-            >
-              {({ isSubmitting }) => (
-                <Form id="login-form">
-                  <label htmlFor="email">Email:</label>
-                  <Field type="email" name="email" />
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    className="error"
-                  />
-
-                  <label htmlFor="password">Password:</label>
-                  <Field type="password" name="password" />
-                  <ErrorMessage
-                    name="password"
-                    component="div"
-                    className="error"
-                  />
-
-                  <button type="submit" disabled={isSubmitting}>
-                    Login
-                  </button>
-                  {error && <p style={{ color: "red" }}>{error}</p>}
-                </Form>
-              )}
-            </Formik>
-          )}
-          {!isLoginMode && <div className="left-signup-decorator"></div>}
-        </div>
-        <div
-          className={`circle ${isLoginMode ? "right-login" : "right-signup"}`}
-        >
-          {!isLoginMode && (
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={handleSubmit}
-            >
-              {({ isSubmitting }) => (
-                <Form id="login-form">
-                  <label htmlFor="username">Username:</label>
-                  <Field type="text" name="username" />
-                  <ErrorMessage
-                    name="username"
-                    component="div"
-                    className="error"
-                  />
-
-                  <label htmlFor="email">Email:</label>
-                  <Field type="email" name="email" />
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    className="error"
-                  />
-
-                  <label htmlFor="password">Password:</label>
-                  <Field type="password" name="password" />
-                  <ErrorMessage
-                    name="password"
-                    component="div"
-                    className="error"
-                  />
-
-                  <label htmlFor="balance">Balance:</label>
-                  <Field type="number" name="balance" />
-                  <ErrorMessage
-                    name="balance"
-                    component="div"
-                    className="error"
-                  />
-
-                  <button type="submit" disabled={isSubmitting}>
-                    Signup
-                  </button>
-                  {error && <p style={{ color: "red" }}>{error}</p>}
-                </Form>
-              )}
-            </Formik>
-          )}
-          {isLoginMode && <div className="right-login-decorator"></div>}
+      <div className="box-container">
+        <div className={`box ${isLoginMode ? "login-box" : "signup-box"}`}>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ isSubmitting }) => (
+              <Form id="login-form">
+                {!isLoginMode && (
+                  <>
+                    <label htmlFor="username">Username:</label>
+                    <Field type="text" name="username" />
+                    <ErrorMessage
+                      name="username"
+                      component="div"
+                      className="error"
+                    />
+                  </>
+                )}
+                <label htmlFor="email">Email:</label>
+                <Field type="email" name="email" />
+                <ErrorMessage name="email" component="div" className="error" />
+                <label htmlFor="password">Password:</label>
+                <Field type="password" name="password" />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="error"
+                />
+                {!isLoginMode && (
+                  <>
+                    <label htmlFor="balance">Balance:</label>
+                    <Field type="number" name="balance" />
+                    <ErrorMessage
+                      name="balance"
+                      component="div"
+                      className="error"
+                    />
+                  </>
+                )}
+                <button type="submit" disabled={isSubmitting}>
+                  {isLoginMode ? "Login" : "Signup"}
+                </button>
+                {error && <p style={{ color: "red" }}>{error}</p>}
+              </Form>
+            )}
+          </Formik>
         </div>
       </div>
       <button id="switch-btn" onClick={toggleMode}>

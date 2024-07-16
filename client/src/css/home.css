@@ -1,52 +1,66 @@
-.section {
+.home-container {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .section {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 50px;
-    background-color: rgb(67, 183, 187);
-}
-
-.section.alternate {
-    flex-direction: reverse;
-    background-color: rgb(238, 238, 238);
-}
-
-.text {
+    background-color: #1cafb9; /* Bootstrap $blue-500 */
+    flex-grow: 1;
+  }
+  
+  .section.alternate {
+    flex-direction: row-reverse;
+    background-color: #f8f9fa; /* Bootstrap light */
+  }
+  
+  .text {
     flex: 1;
     margin: 0 20px;
-}
-
-.pic {
+  }
+  
+  .pic {
     width: 40%; /* Adjust size as needed */
     height: auto;
-}
-
-.headers {
+  }
+  
+  .headers {
     font-size: 50px;
     font-weight: bold;
     line-height: 1.2;
     text-decoration: underline;
-}
-
-.proverbs {
+  }
+  
+  .proverbs {
     font-style: italic;
-}
-.p{
+  }
+  
+  .p {
     font-size: larger;
-}
-#section2{
+  }
+  
+  #section2 {
     padding-bottom: 250px;
-}
-#pic1{
+  }
+  
+  #pic1 {
     padding-top: 50px;
-    width: 500px;
-    height: 600px;
-}
-#pic2{
     width: 400px;
     height: 400px;
-}
-#pic3{
+  }
+  
+  #pic2 {
     width: 400px;
     height: 400px;
-}
+  }
+  
+  #pic3 {
+    width: 400px;
+    height: 400px;
+  }
+  
