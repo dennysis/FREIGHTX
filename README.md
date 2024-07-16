@@ -166,35 +166,31 @@ FREIGHTX/
 - Database: MySQL
 - Other: Git, npm
 
-#### CSS3
 
-Application: Custom CSS stylesheets are applied to components like Navbar, Ship, User, ensuring consistent branding and responsive design across different screen sizes.
-Documentation: CSS3 Documentation [ Css Documentation]([ht](https://devdocs.io/css/)))
+#### CSS3
+- Application: Custom CSS stylesheets are applied to components like Navbar, Ship, User, ensuring consistent branding and responsive design across different screen sizes.
+- Documentation: [CSS Documentation](https://devdocs.io/css/)
 
 #### React
-
-Application: Components such as Navbar, Home, Ports, Ship, User, etc., leverage React's lifecycle methods, hooks, and context API for dynamic data handling and UI updates.
-Documentation: [ React Documentation](((https://react.dev/)))
+- Application: Components such as Navbar, Home, Ports, Ship, User, etc., leverage React's lifecycle methods, hooks, and context API for dynamic data handling and UI updates.
+- Documentation: [React Documentation](https://react.dev/)
 
 #### Flask
-
-Application: Backend routes (/login, /signup, /ships, /bookings, etc.) are implemented using Flask, with Flask-SQLAlchemy for managing MySQL database models (User, Ship, Booking, etc.).
-Documentation: [Flask Documentation]((https://flask.palletsprojects.com/en/3.0.x/))
+- Application: Backend routes (/login, /signup, /ships, /bookings, etc.) are implemented using Flask, with Flask-SQLAlchemy for managing MySQL database models (User, Ship, Booking, etc.).
+- Documentation: [Flask Documentation](https://flask.palletsprojects.com/en/3.0.x/)
 
 #### MySQL
-
-Application: Flask-SQLAlchemy ORM is used to define database models (User, Ship, Booking, etc.), establish relationships between entities, and perform CRUD operations.
-Documentation: [Mysq Documentation](](https://dev.mysql.com/doc/))
+- Application: Flask-SQLAlchemy ORM is used to define database models (User, Ship, Booking, etc.), establish relationships between entities, and perform CRUD operations.
+- Documentation: [MySQL Documentation](https://dev.mysql.com/doc/)
 
 #### Git
-
-Application: GitHub repository (Kamau-sam/FREIGHTX) is used for hosting the project, managing commits, branches, and merging pull requests from all the authors.
-Documentation: [Git Documentation](](https://dev.mysql.com/doc/))
+- Application: GitHub repository (Kamau-sam/FREIGHTX) is used for hosting the project, managing commits, branches, and merging pull requests from all the authors.
+- Documentation: [Git Documentation](https://git-scm.com/doc)
 
 #### npm
+- Application: npm is used to install and manage React dependencies (react, react-dom, etc.) and build tools (webpack, babel, etc.) required for frontend development.
+- Documentation: [npm Documentation](https://docs.npmjs.com/)
 
-Application: npm is used to install and manage React dependencies (react, react-dom, etc.) and build tools (webpack, babel, etc.) required for frontend development.
-Documentation: [Npm Documentation]((https://docs.npmjs.com/))
 ## Setup Instructions
 
 Clone the Repository
