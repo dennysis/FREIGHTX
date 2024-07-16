@@ -33,6 +33,7 @@ FREIGHTX is a comprehensive system for managing parcel shipments and passenger b
 
 ## Project Structure
 FREIGHTX
+├FREIGHTX
 ├── client
 │   ├── node_modules
 │   ├── package.json
@@ -69,7 +70,7 @@ FREIGHTX
     ├── manage.py
     ├── migrations
     ├── models.py
-    ├── pycache
+    ├── __pycache__
     └── seed.py
 
 
