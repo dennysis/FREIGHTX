@@ -1,5 +1,4 @@
-Certainly! Here's the information formatted as a README file:
-markdownCopy# FREIGHTX
+# FREIGHTX
 
 FREIGHTX is a comprehensive system for managing parcel shipments and passenger bookings. Users can log in, ship parcels, book tickets, and view real-time updates on budgets and ship capacities.
 
