@@ -139,10 +139,10 @@ function Auth({ onLogin, isLogin }) {
             )}
           </Formik>
         </div>
+        <button className="toggle-button" onClick={toggleMode}>
+          {isLoginMode ? "Sign Up" : "Login"}
+        </button>
       </div>
-      <button id="switch-btn" onClick={toggleMode}>
-        {isLoginMode ? "Switch to Signup" : "Switch to Login"}
-      </button>
     </div>
   );
 }

@@ -98,15 +98,18 @@ def login():
 def logout():
     session.clear()
     return jsonify({"message": "Logged out successfully"}), 200
-
 @app.route('/checksession', methods=['GET'])
 def check_session():
     user_id = session.get('user_id')
     if user_id:
         user = User.query.filter(User.id == user_id).first()
-        return make_response(jsonify(user.to_dict()), 200)
+        if user:
+            return jsonify(user.to_dict()), 200
+        else:
+            return jsonify({"error": "User not found"}), 404
     else:
         return jsonify({"error": "Unauthorized"}), 401
+
 
 @app.route("/users", methods=["GET"])
 def get_users(): 
@@ -209,5 +212,6 @@ def buy_ticket(ship_id):
             return jsonify({'error': str(e)}), 500
     else:
         return make_response(jsonify({'error': 'Not enough tickets available'}), 400)
+
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

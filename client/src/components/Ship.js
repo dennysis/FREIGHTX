@@ -31,6 +31,7 @@ const contractors = [
 function Ship() {
   const { id } = useParams();
   const [ship, setShip] = useState(null);
+  const [user, setUser] = useState(null);
   const [quantity, setQuantity] = useState(0);
   const [cargoType, setCargoType] = useState(contractors[0]);
   const [shipImage, setShipImage] = useState("");
@@ -80,7 +81,21 @@ function Ship() {
     return randomDate.toLocaleString();
   };
 
-  const handleBooking = () => {
+  const handleBooking = async () => {
+  try {
+    const userResponse = await fetch("/checksession");
+    const userData = await userResponse.json();
+
+    if (userData.error) {
+      alert("Error fetching user details. Please login again.");
+      return;
+    }
+
+    if (userData.balance < ship.price * quantity) {
+      alert("Insufficient balance");
+      return;
+    }
+
     const ticketNumber = generateRandomTicketNumber();
     const bookingInfo = {
       shipName: ship.name,
@@ -91,34 +106,38 @@ function Ship() {
       arrivalTime: generateRandomDateTime(),
     };
 
-    setBookingDetails(bookingInfo);
-    setShowPopup(true);
-  
-
-    fetch(`http://127.0.0.1:5555/ships/${id}/buy_ticket`, {
+    const bookingResponse = await fetch(`http://127.0.0.1:5555/ships/${id}/buy_ticket`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ quantity }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          alert(data.error);
-        } else {
-          setBookingDetails(bookingInfo);
-          setShowPopup(true);
-          setShip((prevShip) => ({
-            ...prevShip,
-            available_tickets: data.available_tickets,
-          }));
-        }
-      })
-      .catch((error) => {
-        console.error("Error during booking:", error);
-      });
-  };
+    });
+
+    const bookingData = await bookingResponse.json();
+
+    if (bookingData.error) {
+      alert(bookingData.error);
+    } else {
+      setBookingDetails(bookingInfo);
+      setShowPopup(true);
+      setShip((prevShip) => ({
+        ...prevShip,
+        available_tickets: bookingData.available_tickets,
+      }));
+
+      // Fetch updated user data to get the latest balance
+      const updatedUserResponse = await fetch("/checksession");
+      const updatedUserData = await updatedUserResponse.json();
+      
+      setUser(updatedUserData);
+    }
+  } catch (error) {
+    console.error("Error during booking:", error);
+  }
+};
+
+  
 
   const closePopup = () => {
     setShowPopup(false);

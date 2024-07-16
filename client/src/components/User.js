@@ -19,13 +19,19 @@ function User() {
   const [showDepositBar, setShowDepositBar] = useState(false);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5555/users/1")
+    fetch("/checksession")
       .then((res) => res.json())
       .then((data) => {
-        setUser(data);
+        if (data.error) {
+          console.error("Error fetching user:", data.error);
+          setUser(mockUserData);
+        } else {
+          setUser(data);
+        }
       })
       .catch((error) => {
         console.error("Error fetching user:", error);
+        setUser(mockUserData); // Use mock data on error
       });
   }, []);
 
@@ -34,7 +40,9 @@ function User() {
   };
 
   const handleDeposit = () => {
-    fetch(`http://127.0.0.1:5555/users/${user.id}`, {
+    if (!user) return;
+
+    fetch(`/users/${user.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
