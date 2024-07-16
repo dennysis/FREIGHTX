@@ -99,27 +99,27 @@ FREIGHTX/
 
 ### Languages
 <p align="center">
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="JavaScript" width="50" height="50"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="Python" width="50" height="50"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" alt="HTML5" width="50" height="50"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" alt="CSS3" width="50" height="50"/>
+  <img src="https://media.giphy.com/media/ln7z2eWriiQAllfVcn/giphy.gif" alt="JavaScript" width="70" height="70"/>
+  <img src="https://media.giphy.com/media/LMt9638dO8dftAjtco/giphy.gif" alt="Python" width="70" height="70"/>
+  <img src="https://media.giphy.com/media/XAxylRMCdpbEWUAvr8/giphy.gif" alt="HTML5" width="70" height="70"/>
+  <img src="https://media.giphy.com/media/fsEaZldNC8A1PJ3mwp/giphy.gif" alt="CSS3" width="70" height="70"/>
 </p>
 
 ### Frameworks
 <p align="center">
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" alt="React" width="50" height="50"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/flask/flask-original.svg" alt="Flask" width="50" height="50"/>
+  <img src="https://media.giphy.com/media/eNAsjO55tPbgaor7ma/giphy.gif" alt="React" width="70" height="70"/>
+  <img src="https://www.vectorlogo.zone/logos/pocoo_flask/pocoo_flask-icon.svg" alt="Flask" width="70" height="70"/>
 </p>
 
 ### Database
 <p align="center">
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" alt="MySQL" width="50" height="50"/>
+  <img src="https://media.giphy.com/media/W71QxkQgCDM1WJYdFz/giphy.gif" alt="MySQL" width="70" height="70"/>
 </p>
 
 ### Tools
 <p align="center">
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg" alt="Git" width="50" height="50"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg" alt="VS Code" width="50" height="50"/>
+  <img src="https://media.giphy.com/media/kH1DBkPNyZPOk0BxrM/giphy.gif" alt="Git" width="100" height="70"/>
+  <img src="https://media.giphy.com/media/IdyAQJVN2kVPNUrojM/giphy.gif" alt="VS Code" width="70" height="70"/>
 </p>
 - Frontend:  React
 - Backend: Flask
