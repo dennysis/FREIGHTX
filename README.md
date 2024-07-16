@@ -14,22 +14,41 @@ FREIGHTX is a comprehensive system for managing parcel shipments and passenger b
 ## Features
 
 ### MVP Features
-- User Authentication
-- Dashboard with user options and budget status
-- Shipping Module with weight validation
-- Passenger Module with ticket availability checks
-- Real-time updates on budgets and capacities
 
-### User Stories
-- Log in and view dashboard
-- Ship a parcel
-- Book a passenger ticket
-- View remaining budget after transactions
-- Check remaining ship weight capacity
+
+### User Authentication
+
+#### Sign Up
+- **Form Validation**: The sign-up form ensures the correct format for username, email, and password.
+- **Account Creation**: Users can create an account with validated details.
+
+#### Log In
+- **User Authentication**: Users can log in with their registered credentials.
+- **Welcome Dashboard**: Upon successful login, users are welcomed to the dashboard, detailing what the app is about.
+
+### Dashboard
+- **Port Selection**: Users can select a port and view ships under that port.
+- **Ship Categories**: Ships are categorized under All Ships, Cargo Ships, and Passenger Ships.
+
+### Ship Information
+- **Ship Details**: Users can view information about ships, including name, Category, arrival and departure ports, and available number tickets and ticket price.
+- **Cargo Ships**: Users can select a shipping contractor from the displayed list.
+
+### Booking Process
+- **Book Shipments**: Users can book shipments after selecting a contractor for cargo ships,However  for Passanger ship you are not required to choose a contractor
+- **Deduct Balance**: The booking amount is deducted from the user's balance after booking.
+- **Booking Confirmation**: A pop-up confirms the successful booking, displaying details such as name, type of ship, arrival and departure ports, and time.
+
+### User Account
+- **View Balance**: Users can view their remaining balance.
+- **Deposit Funds**: Users can deposit more cash to their account.
+
+### Real-time Updates
+- **Budget Status**: Displays the user's remaining budget after transactions.
+- **Ticket Availability**: Updates the number of available passenger tickets in real-time.
 
 ### Stretch Features
 - Transaction history
-- Capacity and ticket availability notifications
 
 ## Project Structure
 
