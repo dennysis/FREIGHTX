@@ -1,191 +1,144 @@
-FREIGHTX
-Table of Contents
+Certainly! Here's the information formatted as a README file:
+markdownCopy# FREIGHTX
 
-Project Overview
-Features
-Project Structure
-Technologies Used
-Installation and Setup
-Running the Project
-Authors
-License
+FREIGHTX is a comprehensive system for managing parcel shipments and passenger bookings. Users can log in, ship parcels, book tickets, and view real-time updates on budgets and ship capacities.
 
-Project Overview
-FREIGHTX is a comprehensive system designed to facilitate user interactions in managing parcel shipments and passenger bookings. The platform allows users to log in to their accounts and choose between shipping a parcel or booking a passenger ticket. The system ensures that parcel shipments adhere to maximum weight limits and adjusts available passenger tickets accordingly. Additionally, user budgets are updated based on their transactions.
-Features
-Minimum Viable Product (MVP)
+## Table of Contents
+1. [Features](#features)
+2. [Project Structure](#project-structure)
+3. [Technologies Used](#technologies-used)
+4. [Installation and Setup](#installation-and-setup)
+5. [Running the Project](#running-the-project)
+6. [Authors](#authors)
+7. [License](#license)
 
-User Authentication:
+## Features
 
-Implement login and registration functionality.
+### MVP Features
+- User Authentication
+- Dashboard with user options and budget status
+- Shipping Module with weight validation
+- Passenger Module with ticket availability checks
+- Real-time updates on budgets and capacities
 
+### User Stories
+- Log in and view dashboard
+- Ship a parcel
+- Book a passenger ticket
+- View remaining budget after transactions
+- Check remaining ship weight capacity
 
-Dashboard:
+### Stretch Features
+- Transaction history
+- Capacity and ticket availability notifications
 
-Display user options and budget status.
-
-
-Shipping Module:
-
-Validate parcel weight against ship's capacity.
-
-
-Passenger Module:
-
-Check ticket availability and update user's budget.
-
-
-Real-time Updates:
-
-Display real-time updates on user budget, ship's weight capacity, and ticket availability.
-
-
-
-User Stories
-
-As a user, I can log in and view my dashboard.
-As a user, I can choose to ship a parcel.
-As a user, I can choose to book a passenger ticket.
-As a user, I can see my remaining budget after a transaction.
-As a user, I can view the remaining weight capacity of a ship.
-
-Stretch Features
-
-View transaction history (parcel shipping and passenger bookings).
-Receive notifications for ship's capacity reaching maximum or ticket availability changes.
-
-Project Structure
-CopyFREIGHTX/
+## Project Structure
+FREIGHTX/
 ├── client/
 │   ├── node_modules/
 │   ├── public/
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── App.js
-│   │   │   ├── Auth.js
-│   │   │   ├── Footer.js
-│   │   │   ├── Home.js
-│   │   │   ├── Navbar.js
-│   │   │   ├── Passenger.js
-│   │   │   ├── Portcard.js
-│   │   │   ├── Ports.js
-│   │   │   ├── Ship.js
-│   │   │   ├── Shiplist.js
-│   │   │   └── User.js
 │   │   ├── css/
 │   │   ├── pics/
 │   │   ├── index.css
 │   │   └── index.js
 │   ├── package.json
-│   ├── package-lock.json
 │   └── README.md
 ├── server/
 │   ├── instance/
-│   │   └── app.db
 │   ├── migrations/
-│   ├── __pycache__/
 │   ├── app.py
 │   ├── config.py
 │   ├── manage.py
 │   ├── models.py
-│   ├── seed.py
-│   └── your_database.db
+│   └── seed.py
 ├── CONTRIBUTING.md
 ├── LICENSE.md
 ├── package.json
 ├── Pipfile
-├── Pipfile.lock
-└── README.md
-Technologies Used
-<h3 align="center">Languages and Tools:</h3>
+└── Pipfile.lock
+Copy
+## Technologies Used
+
 <p align="center">
   <table align="center">
     <tr>
       <td align="center" width="96">
-        <img src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Skills/Languages/javascript-original.svg" alt="JavaScript" title="JavaScript" width="48" height="48"/>
+        <img src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Skills/Languages/javascript-original.svg" alt="JavaScript" width="48" height="48"/>
       </td>
       <td align="center" width="96">
-        <img src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Skills/Frontend/html5-original-wordmark.svg" alt="HTML5" title="HTML5" width="48" height="48"/>
+        <img src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Skills/Frontend/react-original-wordmark.svg" alt="React" width="48" height="48"/>
       </td>
       <td align="center" width="96">
-        <img src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Skills/Frontend/css3-original-wordmark.svg" alt="CSS3" title="CSS3" width="48" height="48"/>
+        <img src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Skills/Backend/nodejs-original-wordmark.svg" alt="NodeJs" width="48" height="48"/>
       </td>
       <td align="center" width="96">
-        <img src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Skills/Frontend/react-original-wordmark.svg" alt="React" title="React" width="48" height="48"/>
-      </td>
-    </tr>
-    <tr>
-      <td align="center" width="96">
-        <img src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Skills/Other/linux-original.svg" alt="Linux" title="Linux" width="48" height="48"/>
-      </td>
-      <td align="center" width="96">
-        <img src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Skills/Other/git-scm-icon.svg" alt="Git" title="Git" width="48" height="48"/>
-      </td>
-      <td align="center" width="96">
-        <img src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Skills/Backend/nodejs-original-wordmark.svg" alt="NodeJs" title="NodeJs" width="48" height="48"/>
-      </td>
-      <td align="center" width="96">
-        <img src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Skills/Languages/python-original.svg" alt="Python" title="Python" width="48" height="48"/>
+        <img src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Skills/Languages/python-original.svg" alt="Python" width="48" height="48"/>
       </td>
     </tr>
     <tr>
       <td align="center" width="96">
-        <img src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Skills/Database/mysql-original-wordmark.svg" alt="SQL" title="SQL" width="48" height="48"/>
+        <img src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Skills/Database/mysql-original-wordmark.svg" alt="MySQL" width="48" height="48"/>
+      </td>
+      <td align="center" width="96">
+        <img src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Skills/Frontend/html5-original-wordmark.svg" alt="HTML5" width="48" height="48"/>
+      </td>
+      <td align="center" width="96">
+        <img src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Skills/Frontend/css3-original-wordmark.svg" alt="CSS3" width="48" height="48"/>
+      </td>
+      <td align="center" width="96">
+        <img src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Skills/Other/git-scm-icon.svg" alt="Git" width="48" height="48"/>
       </td>
     </tr>
   </table>
 </p>
-Technology Usage
 
-JavaScript: Used for frontend development and React components.
-HTML5 & CSS3: Used for structuring and styling the frontend.
-React: Frontend framework for building the user interface.
-Linux: Development environment.
-Git: Version control system for collaborative development.
-Node.js: Backend runtime environment.
-Python: Used for backend development with Flask.
-MySQL: Database management system.
+- Frontend: JavaScript, React, HTML5, CSS3
+- Backend: Python (Flask), Node.js
+- Database: MySQL
+- Other: Git, Linux
 
-Installation and Setup
+## Installation and Setup
 
-Clone the repository:
-Copygit clone https://github.com/your-username/FREIGHTX.git
+1. Clone the repository:
+git clone https://github.com/your-username/FREIGHTX.git
 cd FREIGHTX
-
-Set up the backend:
-Copycd server
+Copy
+2. Set up the backend:
+cd server
 pipenv install
 pipenv shell
-
-Set up the frontend:
-Copycd ../client
+Copy
+3. Set up the frontend:
+cd ../client
 npm install
-
-Set up the database:
-Copycd ../server
+Copy
+4. Set up the database:
+cd ../server
 flask db upgrade
 python seed.py
+Copy
+## Running the Project
 
-
-Running the Project
-
-Start the backend server:
-Copycd server
+1. Start the backend server:
+cd server
 flask run
-
-In a new terminal, start the frontend development server:
-Copycd client
+Copy
+2. In a new terminal, start the frontend:
+cd client
 npm start
+Copy
+3. Open `http://localhost:3000` in your browser.
 
-Open your browser and navigate to http://localhost:3000 to view the application.
+## Authors
 
-Authors
+- [Kamau-sam](https://github.com/Kamau-sam)
+- [All3n0](https://github.com/All3n0)
+- [mfavorv](https://github.com/mfavorv)
+- [dennysis](https://github.com/dennysis)
+- [Gudu-Diana](https://github.com/Gudu-Diana)
 
-Kamau-sam
-All3n0
-mfavorv
-dennysis
-Gudu-Diana
+## License
 
-License
-This project is licensed under the MIT License. See the LICENSE.md file for details.
+This project is licensed under the MIT License. See [LICENSE.md](LICENSE.md) for details.
