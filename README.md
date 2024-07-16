@@ -1,6 +1,5 @@
 # FREIGHTX
 
-# FREIGHTX
 <p align="center">
   <img src="client/src/pics/Freightx.gif" alt="Freightx.gif"/>
 </p>
