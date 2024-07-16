@@ -1,7 +1,8 @@
 # FREIGHTX
 
+# FREIGHTX
 <p align="center">
-  <img src="../FREIGHTX/client/src/pics/Freightx.gif" alt="Freightx.gif"/>
+  <img src="client/src/pics/Freightx.gif" alt="Freightx.gif"/>
 </p>
 
 FREIGHTX is a comprehensive system for managing parcel shipments and passenger bookings. Users can log in, ship parcels, book tickets, and view real-time updates on budgets and ship capacities.
