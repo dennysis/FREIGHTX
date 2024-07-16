@@ -140,24 +140,47 @@ FREIGHTX/
 
 ## Installation and Setup
 
-1. Clone the repository:
-git clone https://github.com/your-username/FREIGHTX.git
-cd FREIGHTX
-Copy
-2. Set up the backend:
-cd server
+Backend Setup
+Clone the repository:
+bash
+Copy code
+git clone https://github.com/Kamau-sam/FREIGHTX.git
+cd FREIGHTX/server
+Install the dependencies:
+bash
+Copy code
 pipenv install
+Activate the virtual environment:
+bash
+Copy code
 pipenv shell
-Copy
-3. Set up the frontend:
-cd ../client
-npm install
-Copy
-4. Set up the database:
-cd ../server
-flask db upgrade
+Set up the database:
+bash
+Copy code
+python manage.py db init
+python manage.py db migrate
+python manage.py db upgrade
+Seed the database:
+bash
+Copy code
 python seed.py
-Copy
+Run the Flask server:
+bash
+Copy code
+flask run
+Frontend Setup
+Navigate to the client directory:
+bash
+Copy code
+cd ../client
+Install the dependencies:
+bash
+Copy code
+npm install
+Start the React development server:
+bash
+Copy code
+npm start
 ## Running the Project
 
 1. Start the backend server:
