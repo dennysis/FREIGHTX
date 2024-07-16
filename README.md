@@ -58,6 +58,27 @@ FREIGHTX/
 ├── Pipfile
 └── Pipfile.lock
 Copy
+
+
+### Key Directories and Files
+
+- `client/`: Contains the React frontend application
+  - `src/components/`: React components
+  - `src/css/`: CSS stylesheets
+  - `src/pics/`: Image assets
+- `server/`: Contains the Flask backend application
+  - `instance/`: Instance-specific configurations
+  - `migrations/`: Database migration files
+  - `app.py`: Main application file
+  - `models.py`: Database models
+  - `seed.py`: Database seeding script
+- `CONTRIBUTING.md`: Guidelines for contributing to the project
+- `LICENSE.md`: Project license information
+- `Pipfile` and `Pipfile.lock`: Python dependency management
+- `package.json`: Node.js dependency management
+
+
+
 ## Technologies Used
 
 <p align="center">
