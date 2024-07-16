@@ -32,32 +32,45 @@ FREIGHTX is a comprehensive system for managing parcel shipments and passenger b
 - Capacity and ticket availability notifications
 
 ## Project Structure
-FREIGHTX/
-├── client/
-│   ├── node_modules/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── css/
-│   │   ├── pics/
-│   │   ├── index.css
-│   │   └── index.js
+FREIGHTX
+├── client
+│   ├── node_modules
 │   ├── package.json
-│   └── README.md
-├── server/
-│   ├── instance/
-│   ├── migrations/
-│   ├── app.py
-│   ├── config.py
-│   ├── manage.py
-│   ├── models.py
-│   └── seed.py
+│   ├── package-lock.json
+│   ├── public
+│   ├── README.md
+│   └── src
+│       ├── components
+│       │   ├── App.js
+│       │   ├── Auth.js
+│       │   ├── Footer.js
+│       │   ├── Home.js
+│       │   ├── Navbar.js
+│       │   ├── Passenger.js
+│       │   ├── Portcard.js
+│       │   ├── Ports.js
+│       │   ├── Ship.js
+│       │   ├── Shiplist.js
+│       │   └── User.js
+│       ├── css
+│       ├── index.css
+│       ├── index.js
+│       └── pics
 ├── CONTRIBUTING.md
 ├── LICENSE.md
-├── package.json
 ├── Pipfile
-└── Pipfile.lock
-Copy
+├── Pipfile.lock
+├── README.md
+└── server
+    ├── app.py
+    ├── config.py
+    ├── instance
+    │   └── app.db
+    ├── manage.py
+    ├── migrations
+    ├── models.py
+    ├── pycache
+    └── seed.py
 
 
 ### Key Directories and Files
