@@ -1,12 +1,13 @@
 # FREIGHTX
 
 <p align="center">
-  <img src="https://media.giphy.com/media/3o7TKS5GkRdYcbXSxi/giphy.gif" alt="Animated Cruise Ship" width="400" height="300"/>
+  <img src="../FREIGHTX/client/src/pics/Freightx.gif" alt="Freightx.gif"/>
 </p>
 
 FREIGHTX is a comprehensive system for managing parcel shipments and passenger bookings. Users can log in, ship parcels, book tickets, and view real-time updates on budgets and ship capacities.
 
 ## Table of Contents
+
 1. [Features](#features)
 2. [Project Structure](#project-structure)
 3. [Technologies Used](#technologies-used)
@@ -19,39 +20,46 @@ FREIGHTX is a comprehensive system for managing parcel shipments and passenger b
 
 ### MVP Features
 
-
 ### User Authentication
 
 #### Sign Up
+
 - **Form Validation**: The sign-up form ensures the correct format for username, email, and password.
 - **Account Creation**: Users can create an account with validated details.
 
 #### Log In
+
 - **User Authentication**: Users can log in with their registered credentials.
 - **Welcome Dashboard**: Upon successful login, users are welcomed to the dashboard, detailing what the app is about.
 
 ### Dashboard
+
 - **Port Selection**: Users can select a port and view ships under that port.
 - **Ship Categories**: Ships are categorized under All Ships, Cargo Ships, and Passenger Ships.
 
 ### Ship Information
+
 - **Ship Details**: Users can view information about ships, including name, Category, arrival and departure ports, and available number tickets and ticket price.
 - **Cargo Ships**: Users can select a shipping contractor from the displayed list.
 
 ### Booking Process
-- **Book Shipments**: Users can book shipments after selecting a contractor for cargo ships,However  for Passanger ship you are not required to choose a contractor
+
+- **Book Shipments**: Users can book shipments after selecting a contractor for cargo ships,However for Passanger ship you are not required to choose a contractor
 - **Deduct Balance**: The booking amount is deducted from the user's balance after booking.
 - **Booking Confirmation**: A pop-up confirms the successful booking, displaying details such as name, type of ship, arrival and departure ports, and time.
 
 ### User Account
+
 - **View Balance**: Users can view their remaining balance.
 - **Deposit Funds**: Users can deposit more cash to their account.
 
 ### Real-time Updates
+
 - **Budget Status**: Displays the user's remaining budget after transactions.
 - **Ticket Availability**: Updates the number of available passenger tickets in real-time.
 
 ### Stretch Features
+
 - Transaction history
 
 ## Project Structure
@@ -118,9 +126,11 @@ FREIGHTX/
 - `LICENSE.md`: Project license information
 - `Pipfile` and `Pipfile.lock`: Python dependency management
 - `package.json`: Node.js dependency management
+
 ## Technologies Used
 
 ### Languages
+
 <p align="center">
   <img src="https://media.giphy.com/media/ln7z2eWriiQAllfVcn/giphy.gif" alt="JavaScript" width="70" height="70"/>
   <img src="https://media.giphy.com/media/LMt9638dO8dftAjtco/giphy.gif" alt="Python" width="70" height="70"/>
@@ -129,17 +139,20 @@ FREIGHTX/
 </p>
 
 ### Frameworks
+
 <p align="center">
   <img src="https://media.giphy.com/media/eNAsjO55tPbgaor7ma/giphy.gif" alt="React" width="70" height="70"/>
   <img src="https://www.vectorlogo.zone/logos/pocoo_flask/pocoo_flask-icon.svg" alt="Flask" width="70" height="70"/>
 </p>
 
 ### Database
+
 <p align="center">
   <img src="https://media.giphy.com/media/W71QxkQgCDM1WJYdFz/giphy.gif" alt="MySQL" width="70" height="70"/>
 </p>
 
 ### Tools
+
 <p align="center">
   <img src="https://media.giphy.com/media/kH1DBkPNyZPOk0BxrM/giphy.gif" alt="Git" width="100" height="70"/>
   <img src="https://media.giphy.com/media/IdyAQJVN2kVPNUrojM/giphy.gif" alt="VS Code" width="70" height="70"/>
@@ -153,65 +166,70 @@ FREIGHTX/
 
 Clone the Repository
 
-    git clone https://github.com/Kamau-sam/FREIGHTX.git     
+    git clone https://github.com/Kamau-sam/FREIGHTX.git
 
 #### Step 2: Install Dependencies
 
-Navigate to the server directory within the cloned repository 
-    
-    cd FREIGHTX/server     
+Navigate to the server directory within the cloned repository
+
+    cd FREIGHTX/server
 
 install the required Python packages using pipenv,by running:
 
-    pipenv install        
+    pipenv install
 
 #### Step 3: Activate the Virtual Environment
-Activate the virtual environment created by pipenv by running 
 
-     pipenv shell                          
+Activate the virtual environment created by pipenv by running
+
+     pipenv shell
 
 to ensure that the installed packages are accessible.
 
 ### Step 4: Set Up the Database
+
 Initialize the database, apply migrations, and upgrade the database schema by running the following commands:
-       
-    python manage.py db init                     
-    python manage.py db migrate                  
-    python manage.py db upgrade                 
+
+    python manage.py db init
+    python manage.py db migrate
+    python manage.py db upgrade
 
 #### Step 5: Seed the Database
+
 Seed the database with initial data by executing:
 
-    python seed.py    
+    python seed.py
 
 #### Step 6: Run the Flask Server
 
 Start the Flask development server to begin serving the application:
 
-    flask run       
+    flask run
 
 ## Frontend Setup
 
 To set up the frontend part of the FreightX project, proceed with the following instructions:
 
 #### Step 1: Navigate to the Client Directory
+
 Change your current working directory to the client folder located at the root of the project:
 
-    cd ../client                            
+    cd ../client
 
 #### Step 2: Install Dependencies
 
 Install the necessary Node.js packages for the frontend development:
-             
-    npm install             
 
-####  Step 3: Start the React Development Server
+    npm install
+
+#### Step 3: Start the React Development Server
 
 Launch the React development server to view the application in your web browser:
 
-    npm start      
-    
+    npm start
+
 After completing these steps:
+
 - The backend server should be running on [http://localhost:5000](http://localhost:5000)
 - The frontend should be accessible at [http://localhost:3000](http://localhost:3000)
 
