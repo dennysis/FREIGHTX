@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
 import "../css/user.css";
 
 const mockUserData = {
@@ -35,11 +33,9 @@ function User() {
         setUser(mockUserData);
       });
 
-    // Retrieve last booking from localStorage
     const storedBooking = localStorage.getItem("lastBooking");
     if (storedBooking) {
       setLastBooking(JSON.parse(storedBooking));
-      // Clear the localStorage after retrieving the booking
       localStorage.removeItem("lastBooking");
     }
   }, []);
@@ -77,10 +73,8 @@ function User() {
     })
       .then((res) => res.json())
       .then((data) => {
-        // Optionally redirect to the home page or perform any cleanup
-        console.log(data.message); // Log the logout message
-        // Example redirection:
-        window.location.replace("/"); // Redirect to the home page
+        console.log(data.message);
+        window.location.replace("/");
       })
       .catch((error) => {
         console.error("Error logging out:", error);
@@ -99,11 +93,9 @@ function User() {
         Your browser does not support the video tag.
       </video>
       <div className="overlay">
-        <Navbar />
         <div className="container user-container mt-5">
           <div className="row align-items-center">
             <div className="col-md-4 user-photo">
-              s
               <img
                 src="https://i.pinimg.com/564x/d9/7b/bb/d97bbb08017ac2309307f0822e63d082.jpg"
                 alt="User"
@@ -185,9 +177,7 @@ function User() {
             </div>
           )}
         </div>
-        <Footer />
 
-        {/* Logout Button */}
         <button className="btn btn-danger btn-logout" onClick={handleLogout}>
           Logout
         </button>

@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/ship.css";
@@ -142,10 +140,7 @@ function Ship() {
       if (bookingData.error) {
         alert(bookingData.error);
       } else {
-        // Store booking info in localStorage
         localStorage.setItem("lastBooking", JSON.stringify(bookingInfo));
-
-        // Show the popup
         setBookingDetails(bookingInfo);
         setShowPopup(true);
       }
@@ -156,7 +151,6 @@ function Ship() {
 
   const closePopup = () => {
     setShowPopup(false);
-    // The user stays on the Ship page after closing the popup
   };
 
   if (!ship) {
@@ -164,8 +158,7 @@ function Ship() {
   }
 
   return (
-    <div>
-      <Navbar user={user} />
+    <div className="ship-page">
       <div className="ship-container">
         <div className="ship-photo">
           <img src={shipImage} alt="Ship" />
@@ -213,7 +206,6 @@ function Ship() {
           </div>
         </div>
       </div>
-      <Footer />
       {showPopup && (
         <div className="popup">
           <div className="popup-content">

@@ -5,7 +5,7 @@ import "../css/footer.css";
 
 function Footer() {
   return (
-    <footer className="footer bg-dark text-white p-3">
+    <footer className="footer">
       <div className="container d-flex justify-content-between align-items-center">
         <img
           src="https://i.pinimg.com/564x/86/4a/3e/864a3e877dc16143e216b145da06a336.jpg"

@@ -1,14 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
 import "../css/home.css";
 
 function Home({ user }) {
   return (
     <div className="home-container">
-      <Navbar user={user} />
-
       <header className="hero">
         <h1>Welcome to FreightX</h1>
         <p>Your gateway to global logistics</p>
@@ -66,8 +62,6 @@ function Home({ user }) {
           <i className="fas fa-anchor"></i> View Ports
         </Link>
       </section>
-
-      <Footer />
     </div>
   );
 }

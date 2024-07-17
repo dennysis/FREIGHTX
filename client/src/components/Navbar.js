@@ -20,9 +20,6 @@ function Navbar({ user }) {
           <Link to="/ports" className="navbar-link">
             <i className="fas fa-anchor"></i> PORTS
           </Link>
-          <Link to="/ships" className="navbar-link">
-            <i className="fas fa-ship"></i> SHIPS
-          </Link>
           <Link to="/user" className="navbar-link">
             <img
               src="https://i.pinimg.com/564x/d9/7b/bb/d97bbb08017ac2309307f0822e63d082.jpg"
