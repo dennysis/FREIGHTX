@@ -194,7 +194,7 @@ function Ship() {
           )}
           {ship.category === "cargo" && (
             <div id="brand">
-              <label htmlFor="cargoType">Select Shipping Company:</label>
+              <label htmlFor="cargoType">Select Shipping contractor:</label>
               <select
                 id="cargoType"
                 value={cargoType}

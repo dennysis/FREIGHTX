@@ -13,10 +13,8 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Check session when component mounts
     checkSession();
 
-    // Add event listener for when user is about to leave the page
     const handleBeforeUnload = (event) => {
       event.preventDefault();
       handleLogout();
@@ -24,7 +22,6 @@ function App() {
 
     window.addEventListener("beforeunload", handleBeforeUnload);
 
-    // Cleanup function to remove event listener
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
@@ -66,59 +63,51 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="app">
       <Navbar user={user} onLogout={handleLogout} />
-      <Switch>
-        <Route path="/login">
-          {user ? (
-            <Redirect to="/home" />
-          ) : (
-            <Auth onLogin={setUser} isLogin={true} />
-          )}
-        </Route>
-        <Route path="/signup">
-          {user ? (
-            <Redirect to="/home" />
-          ) : (
-            <Auth onLogin={setUser} isLogin={false} />
-          )}
-        </Route>
-        <Route path="/home">
-          {user ? <Home user={user} /> : <Redirect to="/login" />}
-        </Route>
-        <Route
-          path="/ports/:id/ships"
-          render={(props) =>
-            user ? (
-              <Shiplist category="cargo" {...props} />
+      <main className="main-content">
+        <Switch>
+          <Route path="/login">
+            {user ? (
+              <Redirect to="/home" />
+            ) : (
+              <Auth onLogin={setUser} isLogin={true} />
+            )}
+          </Route>
+          <Route path="/signup">
+            {user ? (
+              <Redirect to="/home" />
+            ) : (
+              <Auth onLogin={setUser} isLogin={false} />
+            )}
+          </Route>
+          <Route path="/home">
+            {user ? <Home user={user} /> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/ports/:id/ships">
+            {user ? <Shiplist category="cargo" /> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/ports/:id/passenger-ships">
+            {user ? (
+              <Shiplist category="passenger" />
             ) : (
               <Redirect to="/login" />
-            )
-          }
-        />
-        <Route
-          path="/ports/:id/ships"
-          render={(props) =>
-            user ? (
-              <Shiplist category="passenger" {...props} />
-            ) : (
-              <Redirect to="/login" />
-            )
-          }
-        />
-        <Route path="/port">
-          {user ? <Ports user={user} /> : <Redirect to="/login" />}
-        </Route>
-        <Route path="/ship/:id">
-          {user ? <Ship user={user} /> : <Redirect to="/login" />}
-        </Route>
-        <Route path="/user">
-          {user ? <User user={user} /> : <Redirect to="/login" />}
-        </Route>
-        <Route exact path="/">
-          {user ? <Home user={user} /> : <Redirect to="/login" />}
-        </Route>
-      </Switch>
+            )}
+          </Route>
+          <Route path="/ports">
+            {user ? <Ports user={user} /> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/ship/:id">
+            {user ? <Ship user={user} /> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/user">
+            {user ? <User user={user} /> : <Redirect to="/login" />}
+          </Route>
+          <Route exact path="/">
+            {user ? <Home user={user} /> : <Redirect to="/login" />}
+          </Route>
+        </Switch>
+      </main>
       <Footer />
     </div>
   );
