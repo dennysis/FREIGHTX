@@ -77,11 +77,12 @@ function Auth({ onLogin, isLogin }) {
     <div id="login">
       <video autoPlay muted loop id="background-video">
         <source
-          src="https://static.videezy.com/system/resources/previews/000/007/218/original/CIRCULAR_INTERFACE_HUD.mp4"
+          src="https://videos.pexels.com/video-files/2943126/2943126-uhd_2560_1440_24fps.mp4"
           type="video/mp4"
         />
         Your browser does not support the video tag.
       </video>
+
       <div className="navbar">
         <img
           src="https://i.pinimg.com/564x/86/4a/3e/864a3e877dc16143e216b145da06a336.jpg"
@@ -90,58 +91,83 @@ function Auth({ onLogin, isLogin }) {
         />
         <span className="brand-name">FREIGHTX</span>
       </div>
-      <div className="box-container">
-        <div className={`box ${isLoginMode ? "login-box" : "signup-box"}`}>
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-          >
-            {({ isSubmitting }) => (
-              <Form id="login-form">
-                {!isLoginMode && (
-                  <>
-                    <label htmlFor="username">Username:</label>
-                    <Field type="text" name="username" />
-                    <ErrorMessage
-                      name="username"
-                      component="div"
-                      className="error"
-                    />
-                  </>
-                )}
-                <label htmlFor="email">Email:</label>
-                <Field type="email" name="email" />
-                <ErrorMessage name="email" component="div" className="error" />
-                <label htmlFor="password">Password:</label>
-                <Field type="password" name="password" />
-                <ErrorMessage
-                  name="password"
-                  component="div"
-                  className="error"
-                />
-                {!isLoginMode && (
-                  <>
-                    <label htmlFor="balance">Balance:</label>
-                    <Field type="number" name="balance" />
-                    <ErrorMessage
-                      name="balance"
-                      component="div"
-                      className="error"
-                    />
-                  </>
-                )}
-                <button type="submit" disabled={isSubmitting}>
-                  {isLoginMode ? "Login" : "Signup"}
-                </button>
-                {error && <p style={{ color: "red" }}>{error}</p>}
-              </Form>
-            )}
-          </Formik>
+
+      <div className="content-container">
+        <div className="welcome-container">
+          <h2>Welcome to FREIGHTX</h2>
+          <p>
+            Experience the ultimate solution for seamless parcel shipments and
+            hassle-free passenger bookings. With FREIGHTX, manage your shipments
+            and travel plans all in one place.
+          </p>
+          <p>
+            From secure user authentication to real-time updates on budgets and
+            ship capacities, FREIGHTX offers a comprehensive and intuitive
+            platform to meet all your logistics and travel needs.
+          </p>
+          <p>
+            Join us and embark on a journey where efficiency meets reliability,
+            and every shipment and booking is just a click away.
+          </p>
         </div>
-        <button className="toggle-button" onClick={toggleMode}>
-          {isLoginMode ? "Sign Up" : "Login"}
-        </button>
+
+        <div className="box-container">
+          <div className={`box ${isLoginMode ? "login-box" : "signup-box"}`}>
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={handleSubmit}
+            >
+              {({ isSubmitting }) => (
+                <Form id="login-form">
+                  {!isLoginMode && (
+                    <>
+                      <label htmlFor="username">Username:</label>
+                      <Field type="text" name="username" />
+                      <ErrorMessage
+                        name="username"
+                        component="div"
+                        className="error"
+                      />
+                    </>
+                  )}
+                  <label htmlFor="email">Email:</label>
+                  <Field type="email" name="email" />
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="error"
+                  />
+                  <label htmlFor="password">Password:</label>
+                  <Field type="password" name="password" />
+                  <ErrorMessage
+                    name="password"
+                    component="div"
+                    className="error"
+                  />
+                  {!isLoginMode && (
+                    <>
+                      <label htmlFor="balance">Balance:</label>
+                      <Field type="number" name="balance" />
+                      <ErrorMessage
+                        name="balance"
+                        component="div"
+                        className="error"
+                      />
+                    </>
+                  )}
+                  <button type="submit" disabled={isSubmitting}>
+                    {isLoginMode ? "Login" : "Signup"}
+                  </button>
+                  {error && <p style={{ color: "red" }}>{error}</p>}
+                </Form>
+              )}
+            </Formik>
+          </div>
+          <button className="toggle-button" onClick={toggleMode}>
+            {isLoginMode ? "Sign Up" : "Login"}
+          </button>
+        </div>
       </div>
     </div>
   );

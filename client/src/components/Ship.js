@@ -35,8 +35,8 @@ function Ship() {
   const [quantity, setQuantity] = useState(0);
   const [cargoType, setCargoType] = useState(contractors[0]);
   const [shipImage, setShipImage] = useState("");
-  const [showPopup, setShowPopup] = useState(false); // New state for popup visibility
-  const [bookingDetails, setBookingDetails] = useState({}); // State to store booking details
+  const [showPopup, setShowPopup] = useState(false);
+  const [bookingDetails, setBookingDetails] = useState({});
 
   useEffect(() => {
     fetch(`http://127.0.0.1:5555/ships/${id}`)
@@ -44,7 +44,6 @@ function Ship() {
       .then((data) => {
         console.log("Fetched ship:", data);
         setShip(data);
-        // Determine which image to display based on ship category
         if (data.category === "passenger") {
           setShipImage(
             "https://i.pinimg.com/564x/04/0b/a3/040ba35d25e71f55a16d44b32e182062.jpg"
@@ -58,6 +57,19 @@ function Ship() {
       .catch((error) => {
         console.error("Error fetching ship:", error);
       });
+
+    fetch("/checksession")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          console.error("Error fetching user details:", data.error);
+        } else {
+          setUser(data);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching user:", error);
+      });
   }, [id]);
 
   const handleQuantityChange = (delta) => {
@@ -69,88 +81,91 @@ function Ship() {
   };
 
   const generateRandomTicketNumber = () => {
-    return Math.floor(Math.random() * 9000000000) + 1000000000; // Generate a 10-digit random number
+    return Math.floor(Math.random() * 9000000000) + 1000000000;
   };
 
   const generateRandomDateTime = () => {
     const start = new Date();
-    const end = new Date(start.getTime() + 30 * 24 * 60 * 60 * 1000); // Within the next 30 days
+    const end = new Date(start.getTime() + 30 * 24 * 60 * 60 * 1000);
     const randomDate = new Date(
       start.getTime() + Math.random() * (end.getTime() - start.getTime())
     );
     return randomDate.toLocaleString();
   };
 
+  const getRandomShipmentStatus = () => {
+    const statuses = ["Awaiting Shipment", "On transit", "Shipped"];
+    return statuses[Math.floor(Math.random() * statuses.length)];
+  };
+
   const handleBooking = async () => {
-  try {
-    const userResponse = await fetch("/checksession");
-    const userData = await userResponse.json();
+    try {
+      const userResponse = await fetch("/checksession");
+      const userData = await userResponse.json();
 
-    if (userData.error) {
-      alert("Error fetching user details. Please login again.");
-      return;
+      if (userData.error) {
+        alert("Error fetching user details. Please login again.");
+        return;
+      }
+
+      if (userData.balance < ship.price * quantity) {
+        alert("Insufficient balance");
+        return;
+      }
+
+      const ticketNumber = generateRandomTicketNumber();
+      const bookingInfo = {
+        shipName: ship.name,
+        ticketNumber,
+        departurePort: ship.port_from.name,
+        departureTime: generateRandomDateTime(),
+        arrivalPort: ship.port_to.name,
+        arrivalTime: generateRandomDateTime(),
+        category: ship.category,
+        shipmentStatus:
+          ship.category === "cargo" ? getRandomShipmentStatus() : null,
+      };
+
+      const bookingResponse = await fetch(
+        `http://127.0.0.1:5555/ships/${id}/buy_ticket`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ quantity }),
+        }
+      );
+
+      const bookingData = await bookingResponse.json();
+
+      if (bookingData.error) {
+        alert(bookingData.error);
+      } else {
+        // Store booking info in localStorage
+        localStorage.setItem("lastBooking", JSON.stringify(bookingInfo));
+
+        // Show the popup
+        setBookingDetails(bookingInfo);
+        setShowPopup(true);
+      }
+    } catch (error) {
+      console.error("Error during booking:", error);
     }
-
-    if (userData.balance < ship.price * quantity) {
-      alert("Insufficient balance");
-      return;
-    }
-
-    const ticketNumber = generateRandomTicketNumber();
-    const bookingInfo = {
-      shipName: ship.name,
-      ticketNumber,
-      departurePort: ship.port_from.name,
-      departureTime: generateRandomDateTime(),
-      arrivalPort: ship.port_to.name,
-      arrivalTime: generateRandomDateTime(),
-    };
-
-    const bookingResponse = await fetch(`http://127.0.0.1:5555/ships/${id}/buy_ticket`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ quantity }),
-    });
-
-    const bookingData = await bookingResponse.json();
-
-    if (bookingData.error) {
-      alert(bookingData.error);
-    } else {
-      setBookingDetails(bookingInfo);
-      setShowPopup(true);
-      setShip((prevShip) => ({
-        ...prevShip,
-        available_tickets: bookingData.available_tickets,
-      }));
-
-      // Fetch updated user data to get the latest balance
-      const updatedUserResponse = await fetch("/checksession");
-      const updatedUserData = await updatedUserResponse.json();
-      
-      setUser(updatedUserData);
-    }
-  } catch (error) {
-    console.error("Error during booking:", error);
-  }
-};
-
-  
+  };
 
   const closePopup = () => {
     setShowPopup(false);
+    // The user stays on the Ship page after closing the popup
   };
 
   if (!ship) {
     return <div>Loading...</div>;
   }
 
-
   return (
     <div>
-      <Navbar />
+      <Navbar user={user} />
       <div className="ship-container">
         <div className="ship-photo">
           <img src={shipImage} alt="Ship" />
@@ -203,7 +218,6 @@ function Ship() {
         <div className="popup">
           <div className="popup-content">
             <h2>Booking successful!</h2>
-
             <p>
               <strong>Ship Name:</strong> {bookingDetails.shipName}
             </p>
