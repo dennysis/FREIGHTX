@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../css/navbar.css";
 
-function Navbar({ user }) {
+function Navbar({ user, onLogout }) {
   return (
     <div className="navbar">
       <div className="navbar-left">
@@ -17,6 +17,9 @@ function Navbar({ user }) {
       </div>
       {user && (
         <div className="navbar-right">
+          <Link to="/home" className="navbar-link">
+            <i className="fas fa-home"></i> HOME
+          </Link>
           <Link to="/ports" className="navbar-link">
             <i className="fas fa-anchor"></i> PORTS
           </Link>
@@ -27,6 +30,9 @@ function Navbar({ user }) {
               id="user-logo"
             />
           </Link>
+          <button onClick={onLogout} className="navbar-link logout-button">
+            <i className="fas fa-sign-out-alt"></i> LOGOUT
+          </button>
         </div>
       )}
     </div>

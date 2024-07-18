@@ -55,12 +55,9 @@ function Home({ user }) {
       <section className="ports-section">
         <h2>Discover Our Global Network</h2>
         <p>
-          Click on the ports icon to view a list of our operational ports
-          worldwide.
+          Click on the Explore Our Ports Button to view a list of our
+          operational ports worldwide.
         </p>
-        <Link to="/ports" className="ports-button">
-          <i className="fas fa-anchor"></i> View Ports
-        </Link>
       </section>
     </div>
   );
