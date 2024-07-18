@@ -1,16 +1,29 @@
 #head {
-  margin-top: 30px; 
+  margin-top: 30px;
   text-align: center;
+  font-size: 2.5em;
+  color: #333;
+}
+
+.instruction {
+  text-align: center;
+  font-size: 1.2em;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .ports-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  padding: 16px;
+  gap: 24px;
 }
 
-/* For smaller screens, adjust the number of columns */
 @media (max-width: 1200px) {
   .ports-container {
     grid-template-columns: repeat(2, 1fr);
@@ -24,9 +37,15 @@
 }
 
 .port-card {
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.port-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .port-card-image {
@@ -35,12 +54,34 @@
   object-fit: cover;
 }
 
+.port-card-content {
+  padding: 16px;
+}
+
 .card-title {
-  margin: 16px 0 8px;
-  font-size: 1.2em;
+  margin: 0 0 8px;
+  font-size: 1.4em;
+  color: #333;
 }
 
 .card-text {
   margin: 0 0 16px;
   color: #666;
+}
+
+.view-ships-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.view-ships-btn:hover {
+  background-color: #0056b3;
 }

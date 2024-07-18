@@ -1,9 +1,8 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/potcard.css";
 import { useHistory } from "react-router-dom";
+import "../css/potcard.css";
 
-function PortCard({ port, category }) {
+function PortCard({ port }) {
   const history = useHistory();
 
   const handleViewShips = () => {
@@ -11,16 +10,12 @@ function PortCard({ port, category }) {
   };
 
   return (
-    <div className="card port-card">
-      <img
-        src={port.image_url}
-        alt={port.name}
-        className="card-img-top port-card-image"
-      />
-      <div className="card-body text-center">
-        <h5 className="card-title">{port.name}</h5>
+    <div className="port-card">
+      <img src={port.image_url} alt={port.name} className="port-card-image" />
+      <div className="port-card-content">
+        <h3 className="card-title">{port.name}</h3>
         <p className="card-text">{port.location}</p>
-        <button className="btn btn-primary" onClick={handleViewShips}>
+        <button className="view-ships-btn" onClick={handleViewShips}>
           View Ships
         </button>
       </div>
