@@ -238,3 +238,20 @@ button[type="submit"]:hover {
     padding: 20px;
   }
 }
+.emphasis {
+  font-weight: bold;
+  color: #35341a; /* Blue color for emphasis */
+}
+
+.highlighted-message {
+  background-color: #f8f9fa; /* Light gray background */
+  border-left: 4px solid #28a745; /* Green left border */
+  padding: 10px;
+  margin-top: 20px;
+  color: #495057; /* Dark gray text */
+  border-radius: 4px;
+}
+
+.highlighted-message .emphasis {
+  color: #28a745; /* Green color for emphasized text in the highlighted message */
+}

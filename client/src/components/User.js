@@ -67,20 +67,6 @@ function User() {
       });
   };
 
-  const handleLogout = () => {
-    fetch("/logout", {
-      method: "POST",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data.message);
-        window.location.replace("/");
-      })
-      .catch((error) => {
-        console.error("Error logging out:", error);
-      });
-  };
-
   const userData = user || mockUserData;
 
   return (
@@ -177,10 +163,6 @@ function User() {
             </div>
           )}
         </div>
-
-        <button className="btn btn-danger btn-logout" onClick={handleLogout}>
-          Logout
-        </button>
       </div>
     </div>
   );

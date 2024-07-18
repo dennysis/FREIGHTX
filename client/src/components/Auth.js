@@ -96,18 +96,32 @@ function Auth({ onLogin, isLogin }) {
         <div className="welcome-container">
           <h2>Welcome to FREIGHTX</h2>
           <p>
-            Experience the ultimate solution for seamless parcel shipments and
-            hassle-free passenger bookings. With FREIGHTX, manage your shipments
-            and travel plans all in one place.
+            Experience the <span className="emphasis">ultimate solution</span>{" "}
+            for <span className="emphasis">seamless parcel shipments</span> and
+            <span className="emphasis">hassle-free passenger bookings</span>.
+            With FREIGHTX, manage your shipments and travel plans all in one
+            place.
           </p>
           <p>
-            From secure user authentication to real-time updates on budgets and
-            ship capacities, FREIGHTX offers a comprehensive and intuitive
-            platform to meet all your logistics and travel needs.
+            From <span className="emphasis">secure user authentication</span> to{" "}
+            <span className="emphasis">real-time updates</span> on budgets and
+            ship capacities, FREIGHTX offers a{" "}
+            <span className="emphasis">
+              comprehensive and intuitive platform
+            </span>{" "}
+            to meet all your logistics and travel needs.
           </p>
           <p>
-            Join us and embark on a journey where efficiency meets reliability,
-            and every shipment and booking is just a click away.
+            Join us and embark on a journey where{" "}
+            <span className="emphasis">efficiency meets reliability</span>, and
+            every shipment and booking is just a click away.
+          </p>
+          <p className="user-direction highlighted-message">
+            <span className="emphasis">Already have an account?</span> Simply{" "}
+            <span className="emphasis">log in</span> to access your dashboard.
+            <span className="emphasis">New to FREIGHTX?</span>{" "}
+            <span className="emphasis">Sign up</span> now to start your journey
+            with us!
           </p>
         </div>
 
@@ -157,7 +171,7 @@ function Auth({ onLogin, isLogin }) {
                     </>
                   )}
                   <button type="submit" disabled={isSubmitting}>
-                    {isLoginMode ? "Login" : "Signup"}
+                    {isLoginMode ? "Login" : "Sign Up"}
                   </button>
                   {error && <p style={{ color: "red" }}>{error}</p>}
                 </Form>
@@ -165,7 +179,7 @@ function Auth({ onLogin, isLogin }) {
             </Formik>
           </div>
           <button className="toggle-button" onClick={toggleMode}>
-            {isLoginMode ? "Sign Up" : "Login"}
+            {isLoginMode ? "Create an Account" : "Back to Login"}
           </button>
         </div>
       </div>
