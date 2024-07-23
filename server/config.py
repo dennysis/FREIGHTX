@@ -11,14 +11,12 @@ app = Flask(__name__)
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # Ensure the instance directory exists
-if not os.path.exists(os.path.join(BASE_DIR, 'instance')):postgresql://freightx_database_user:zO9pfeFtiWjOl6YxDFNjWGZWfCEeGfEx@dpg-cqdu1p08fa8c73dsfef0-a:5432/freightx_database?sslmode=require
-
-os.makedirs(os.path.join(BASE_DIR, 'instance'))
-    
+if not os.path.exists(os.path.join(BASE_DIR, 'instance')):
+    os.makedirs(os.path.join(BASE_DIR, 'instance'))
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://freightx_database_user:zO9pfeFtiWjOl6YxDFNjWGZWfCEeGfEx@dpg-cqdu1p08fa8c73dsfef0-a:5432/freightx_database?sslmode=require"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'your_secret_key_here'  
+app.config['SECRET_KEY'] = 'your_secret_key_here'
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
 
 # Define metadata and instantiate db
