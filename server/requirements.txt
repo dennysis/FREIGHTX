@@ -52,3 +52,4 @@ virtualenv==20.26.3
 wcwidth==0.2.13
 Werkzeug==2.2.2
 zipp==3.19.2
+psycopg2-binary
