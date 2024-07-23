@@ -37,7 +37,7 @@ function Ship() {
   const [bookingDetails, setBookingDetails] = useState({});
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:5555/ships/${id}`)
+    fetch(`http://127.0.0.1:8000/ships/${id}`)
       .then((res) => res.json())
       .then((data) => {
         console.log("Fetched ship:", data);
